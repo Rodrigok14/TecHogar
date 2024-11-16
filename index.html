@@ -30,9 +30,19 @@
             border-radius: 50%;
             position: relative;
             z-index: 1;
+            animation: logoEffect 3s forwards;
         }
 
-        /* Efecto de luz */
+        /* Efecto de luz y cambio del logo a blanco */
+        @keyframes logoEffect {
+            0% {
+                filter: none;
+            }
+            100% {
+                filter: brightness(0) invert(1);
+            }
+        }
+
         .header::after {
             content: '';
             position: absolute;
@@ -146,14 +156,45 @@
             width: 48%;
         }
 
-        .financing ul {
-            list-style: none;
-            padding: 0;
+        .financing p {
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
 
-        .financing ul li {
-            margin: 10px 0;
+        .financing .instruction {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Opciones de financiamiento seleccionables */
+        .financing-option {
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .financing-option.selected {
+            background-color: #444;
+        }
+
+        /* Botón para enviar por WhatsApp */
+        .whatsapp-button {
+            display: none;
+            background-color: #25D366;
             color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .whatsapp-button.show {
+            display: block;
         }
 
         .financing .close-btn {
@@ -466,40 +507,45 @@
     <div class="financing" id="financing">
         <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
         <h3 id="product-name"></h3>
-        <p>Opciones de financiamiento:</p>
+        <p class="instruction">Selecciona una opción de financiamiento:</p>
         <div class="financing-options">
             <div>
                 <h4>Semanales</h4>
-                <ul id="weekly-financing-options"></ul>
+                <div id="weekly-financing-options"></div>
             </div>
             <div>
                 <h4>Mensuales</h4>
-                <ul id="monthly-financing-options"></ul>
+                <div id="monthly-financing-options"></div>
             </div>
         </div>
+        <button class="whatsapp-button" id="whatsapp-button">Enviar por WhatsApp</button>
     </div>
 
     <!-- Sección de Contacto -->
     <div class="contact">
         <h2>¡Contáctanos!</h2>
         <p>Email: <a href="mailto:techogar05@gmail.com">techogar05@gmail.com</a></p>
+        <p>WhatsApp: <a href="https://wa.me/5493813198039" target="_blank">+54 9 3813 19-8039</a></p>
+    </div>
+
+    <!-- Sección de Redes Sociales -->
+    <div class="contact">
+        <h2>Redes Sociales</h2>
         <div class="social-icons">
-            <a href="https://wa.me/5493813198039" target="_blank">
-                <img src="whatsapp-icon.png" alt="WhatsApp">
-            </a>
             <a href="https://www.facebook.com/TecHogar05" target="_blank">
                 <img src="facebook-icon.png" alt="Facebook">
             </a>
             <a href="https://www.instagram.com/techogarr/" target="_blank">
                 <img src="instagram-icon.png" alt="Instagram">
             </a>
-            <a href="mailto:techogar05@gmail.com">
-                <img src="email-icon.png" alt="Email">
-            </a>
         </div>
     </div>
 
     <script>
+        let selectedFinancingOption = null;
+        let selectedProductName = '';
+        let selectedProductPrice = 0;
+
         function calculateInstallments(price, term, type) {
             const initialPayment = price * 0.3; // 30% de entrada
             const remainingBalance = price - initialPayment;
@@ -513,16 +559,24 @@
 
             const totalWithInterest = remainingBalance * (1 + interestRate / 100);
             const installment = Math.ceil(totalWithInterest / term);
-            const formattedInstallment = installment.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+            const formattedInstallment = installment.toLocaleString('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            });
 
             return formattedInstallment;
         }
 
         function showFinancing(productName, price) {
-            const weeklyOptions = document.getElementById("weekly-financing-options");
-            const monthlyOptions = document.getElementById("monthly-financing-options");
-            weeklyOptions.innerHTML = "";
-            monthlyOptions.innerHTML = "";
+            selectedProductName = productName;
+            selectedProductPrice = price;
+            selectedFinancingOption = null;
+
+            const weeklyOptionsContainer = document.getElementById("weekly-financing-options");
+            const monthlyOptionsContainer = document.getElementById("monthly-financing-options");
+            weeklyOptionsContainer.innerHTML = "";
+            monthlyOptionsContainer.innerHTML = "";
 
             const weeks = [4, 8, 12, 16, 20];
             const months = [1, 2, 3, 4, 5];
@@ -530,28 +584,59 @@
             // Opciones de financiamiento semanal
             weeks.forEach(week => {
                 const installment = calculateInstallments(price, week, 'week');
-                const li = document.createElement("li");
-                li.textContent = `${week} semanas de ${installment}`;
-                weeklyOptions.appendChild(li);
+                const div = document.createElement("div");
+                div.classList.add('financing-option');
+                div.textContent = `${week} semanas de ${installment}`;
+                div.onclick = (event) => selectFinancingOption(event, `${week} semanas de ${installment}`);
+                weeklyOptionsContainer.appendChild(div);
             });
 
             // Opciones de financiamiento mensual
             months.forEach(month => {
                 const installment = calculateInstallments(price, month, 'month');
-                const li = document.createElement("li");
-                li.textContent = `${month} meses de ${installment}`;
-                monthlyOptions.appendChild(li);
+                const div = document.createElement("div");
+                div.classList.add('financing-option');
+                div.textContent = `${month} meses de ${installment}`;
+                div.onclick = (event) => selectFinancingOption(event, `${month} meses de ${installment}`);
+                monthlyOptionsContainer.appendChild(div);
             });
 
             document.getElementById("product-name").textContent = `Financiamiento para: ${productName}`;
             document.querySelector(".overlay").classList.add("active");
             document.getElementById("financing").classList.add("active");
+
+            // Ocultar el botón de WhatsApp hasta que se seleccione una opción
+            document.getElementById("whatsapp-button").classList.remove('show');
+        }
+
+        function selectFinancingOption(event, optionText) {
+            // Remover la clase 'selected' de todas las opciones
+            document.querySelectorAll('.financing-option').forEach(elem => {
+                elem.classList.remove('selected');
+            });
+
+            // Añadir la clase 'selected' a la opción seleccionada
+            event.currentTarget.classList.add('selected');
+            selectedFinancingOption = optionText;
+
+            // Mostrar el botón de WhatsApp
+            document.getElementById("whatsapp-button").classList.add('show');
         }
 
         function closeFinancing() {
             document.querySelector(".overlay").classList.remove("active");
             document.getElementById("financing").classList.remove("active");
         }
+
+        // Enviar mensaje por WhatsApp
+        document.getElementById("whatsapp-button").addEventListener('click', function () {
+            if (selectedFinancingOption) {
+                const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOption}.`;
+                const phoneNumber = '5493813198039'; // Número de WhatsApp sin '+' ni espacios
+                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.open(url, '_blank');
+            }
+        });
     </script>
 </body>
 
