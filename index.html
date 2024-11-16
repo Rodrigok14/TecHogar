@@ -40,25 +40,25 @@
     .intro-logo {
         max-width: 100px;
         opacity: 0;
-        animation: logoIntro 3s forwards;
-        filter: brightness(100%);
+        animation: logoIntro 1.5s forwards;
+        filter: invert(1); /* Aplicamos el filtro para invertir los colores */
     }
 
     @keyframes logoIntro {
         0% {
             opacity: 0;
             transform: scale(0.5);
-            filter: brightness(0%);
+            filter: invert(1); /* Mantener el filtro durante la animación */
         }
         50% {
             opacity: 1;
-            transform: scale(1.2);
-            filter: brightness(100%);
+            transform: scale(2.5); /* Logo más grande */
+            filter: invert(1);
         }
         100% {
             opacity: 1;
             transform: scale(1);
-            filter: brightness(100%);
+            filter: invert(1);
         }
     }
 
@@ -72,7 +72,7 @@
         left: -25%;
         background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
         opacity: 0;
-        animation: lightEffect 3s forwards;
+        animation: lightEffect 1.5s forwards;
     }
 
     @keyframes lightEffect {
@@ -100,6 +100,7 @@
     .header img {
         max-width: 120px;
         height: auto;
+        transition: filter 0.5s;
     }
 
     /* Botón de menú flotante */
@@ -132,7 +133,7 @@
         position: fixed;
         top: 70px;
         left: 20px;
-        background-color: #fff;
+        background-color: #007bff; /* Fondo azul */
         border: 1px solid #ddd;
         border-radius: 5px;
         z-index: 1000;
@@ -143,7 +144,7 @@
     .menu-dropdown a {
         display: block;
         padding: 10px 15px;
-        color: #000;
+        color: #fff; /* Texto blanco */
         text-decoration: none;
         font-size: 1rem;
         border-bottom: 1px solid #eee;
@@ -154,7 +155,7 @@
     }
 
     .menu-dropdown a:hover {
-        background-color: #f0f0f0;
+        background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
     }
 
     /* Galería */
@@ -357,6 +358,7 @@
         }
     }
 </style>
+
 </head>
 
 <body>
