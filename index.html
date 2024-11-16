@@ -22,7 +22,7 @@
         }
 
         .header img {
-            max-width: 200px;
+            max-width: 300px; /* Tamaño ajustado del logotipo */
             height: auto;
             opacity: 0;
             animation: fadeIn 2s forwards;
@@ -44,7 +44,7 @@
 
         .product {
             background: #4b3e38;
-            width: 200px;
+            width: 220px;
             padding: 15px;
             border-radius: 10px;
             position: relative;
@@ -84,6 +84,13 @@
         .product-info .price {
             font-size: 1.2rem;
             color: #f5b041;
+        }
+
+        .product-info .financing-link {
+            color: #f5b041;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .financing {
@@ -141,10 +148,11 @@
     <!-- Galería de productos -->
     <div class="gallery">
         <!-- Lista de productos -->
-        <div class="product" onclick="showFinancing('Poco c65 8-256gb', 285000)">
+        <div class="product">
             <img src="tu-imagen-aqui1.png" alt="Poco c65 8-256gb">
             <div class="product-info">
-                <p class="price">$ 285,000.00</p>
+                <p class="price">Precio contado: $285,000.00</p>
+                <span class="financing-link" onclick="showFinancing('Poco c65 8-256gb', 285000)">Ver financiamiento</span>
             </div>
         </div>
         <!-- Puedes añadir más productos aquí -->
@@ -159,6 +167,20 @@
     </div>
 
     <script>
+        function calculateInstallments(price, weeksOrMonths, type) {
+            const initialPayment = price * 0.3; // 30% de entrada
+            const remainingBalance = price - initialPayment;
+            const interestRate = type === 'week' ? (13 * (weeksOrMonths / 4)) : (13 * weeksOrMonths);
+            const totalWithInterest = remainingBalance * (1 + interestRate / 100);
+            const installment = (totalWithInterest / weeksOrMonths).toFixed(2);
+
+            return {
+                initialPayment: initialPayment.toFixed(2),
+                installment: installment,
+                totalWithInterest: totalWithInterest.toFixed(2)
+            };
+        }
+
         function showFinancing(productName, price) {
             const financingOptions = document.getElementById("financing-options");
             financingOptions.innerHTML = ""; // Limpiar las opciones previas
@@ -166,22 +188,23 @@
             const weeks = [4, 8, 12, 16, 20];
             const months = [1, 2, 3, 4, 5];
 
-            // Generar opciones de financiamiento
+            // Generar opciones de financiamiento semanal
             weeks.forEach(week => {
-                const weeklyPayment = (price / week).toFixed(2);
+                const { initialPayment, installment, totalWithInterest } = calculateInstallments(price, week, 'week');
                 const li = document.createElement("li");
-                li.textContent = `${week} semanas - $${weeklyPayment} por semana`;
+                li.textContent = `${week} semanas - Entrada: $${initialPayment}, Cuotas: $${installment} (Total: $${totalWithInterest})`;
                 financingOptions.appendChild(li);
             });
 
+            // Generar opciones de financiamiento mensual
             months.forEach(month => {
-                const monthlyPayment = (price / month).toFixed(2);
+                const { initialPayment, installment, totalWithInterest } = calculateInstallments(price, month, 'month');
                 const li = document.createElement("li");
-                li.textContent = `${month} meses - $${monthlyPayment} por mes`;
+                li.textContent = `${month} meses - Entrada: $${initialPayment}, Cuotas: $${installment} (Total: $${totalWithInterest})`;
                 financingOptions.appendChild(li);
             });
 
-            document.getElementById("product-name").textContent = productName;
+            document.getElementById("product-name").textContent = `Financiamiento para: ${productName}`;
             document.querySelector(".overlay").classList.add("active");
             document.getElementById("financing").classList.add("active");
         }
