@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <!-- Meta etiquetas y título -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecHogar</title>
@@ -10,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <!-- Estilos -->
     <style>
         /* Estilos generales */
         body {
@@ -18,33 +20,83 @@
             color: #000; /* Texto en negro */
             margin: 0;
             padding: 0;
+            overflow-x: hidden; /* Ocultar scroll horizontal */
         }
 
-        /* Header con logo */
+        /* Header con animación */
         .header {
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Ocupa toda la altura de la ventana */
             background-color: #fff;
-            border-bottom: 1px solid #ddd;
+            overflow: hidden;
         }
 
-        .header img {
-            max-width: 100px; /* Logo más pequeño */
+        /* Líneas animadas */
+        .lines-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: #007bff;
+            animation: lineAnimation 2s forwards;
+        }
+
+        /* Posición inicial de las líneas */
+        .line:nth-child(1) {
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .line:nth-child(2) {
+            left: 110%;
+            animation-delay: 0.5s;
+        }
+
+        .line:nth-child(3) {
+            left: -10%;
+            animation-delay: 1s;
+        }
+
+        @keyframes lineAnimation {
+            to {
+                left: 50%;
+            }
+        }
+
+        /* Logo centrado */
+        .logo-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: logoAppear 1s forwards 2.5s; /* Aparece después de las líneas */
+            max-width: 200px;
             height: auto;
-            animation: logoAnimation 2s ease-in-out;
         }
 
-        /* Animación del logo */
-        @keyframes logoAnimation {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            100% {
+        @keyframes logoAppear {
+            to {
                 opacity: 1;
-                transform: scale(1);
             }
+        }
+
+        /* Ocultar el contenido durante la animación */
+        .content {
+            display: none;
+        }
+
+        /* Mostrar el contenido después de la animación */
+        .show-content .content {
+            display: block;
         }
 
         /* Botón de menú flotante */
@@ -63,6 +115,14 @@
             font-size: 1rem;
             display: flex;
             align-items: center;
+            opacity: 0;
+            animation: menuAppear 1s forwards 3.5s; /* Aparece después del logo */
+        }
+
+        @keyframes menuAppear {
+            to {
+                opacity: 1;
+            }
         }
 
         .menu-button img {
@@ -326,9 +386,14 @@
 </head>
 
 <body>
-    <!-- Header con logo -->
+    <!-- Header con animación -->
     <div class="header">
-        <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo">
+        <div class="lines-container">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo" class="logo-center">
     </div>
 
     <!-- Botón de menú flotante -->
@@ -345,19 +410,20 @@
         <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
     </div>
 
-    <!-- Galería de productos -->
-    <div class="gallery">
-        <!-- Producto 1 -->
-        <div class="product" data-category="celulares">
-            <img src="producto1.png" alt="Poco c65 8-256gb">
-            <div class="product-info">
-                <p class="name">Poco c65 8-256gb</p>
-                <p class="price">Precio contado: $285,000</p>
-                <a class="financing-link" onclick="showFinancing('Poco c65 8-256gb', 285000)">Ver financiamiento</a>
+    <!-- Contenido principal -->
+    <div class="content">
+        <!-- Galería de productos -->
+        <div class="gallery">
+            <!-- Producto 1 -->
+            <div class="product" data-category="celulares">
+                <img src="producto1.png" alt="Poco c65 8-256gb">
+                <div class="product-info">
+                    <p class="name">Poco c65 8-256gb</p>
+                    <p class="price">Precio contado: $285,000</p>
+                    <a class="financing-link" onclick="showFinancing('Poco c65 8-256gb', 285000)">Ver financiamiento</a>
+                </div>
             </div>
-        </div>
-
-        <!-- Producto 2 -->
+            <!-- Producto 2 -->
         <div class="product" data-category="celulares">
             <img src="producto2.png" alt="Go Spark 8 ram 128gb">
             <div class="product-info">
@@ -546,39 +612,88 @@
                 <a class="financing-link" onclick="showFinancing('Moto g24 128/4', 250000)">Ver financiamiento</a>
             </div>
         </div>
-
-
-    <!-- Botón de chat en la esquina inferior derecha -->
-    <div class="chat-button" onclick="openChat()">
-        <span>Chat</span>
-        <img src="https://imgur.com/gOT2iCq.png" alt="Chat Icon">
-    </div>
-
-    <!-- Overlay y Modal de Financiamiento -->
-    <div class="overlay" onclick="closeFinancing()"></div>
-    <div class="financing" id="financing">
-        <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
-        <h3 id="product-name"></h3>
-        <p class="instruction">Selecciona una opción de financiamiento:</p>
-
-        <!-- Opciones Semanales -->
-        <div class="financing-section">
-            <h4>Semanales</h4>
-            <div id="weekly-financing-options"></div>
-            <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
+        <!-- Botón de chat en la esquina inferior derecha -->
+        <div class="chat-button" onclick="openChat()">
+            <span>Chat</span>
+            <img src="https://i.imgur.com/8FMQ2Lq.png" alt="Chat Icon">
         </div>
 
-        <div class="separator"></div>
+        <!-- Overlay y Modal de Financiamiento -->
+        <div class="overlay" onclick="closeFinancing()"></div>
+        <div class="financing" id="financing">
+            <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
+            <h3 id="product-name"></h3>
+            <p class="instruction">Selecciona una opción de financiamiento:</p>
 
-        <!-- Opciones Mensuales -->
-        <div class="financing-section">
-            <h4>Mensuales</h4>
-            <div id="monthly-financing-options"></div>
-            <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
+            <!-- Opciones Semanales -->
+            <div class="financing-section">
+                <h4>Semanales</h4>
+                <div id="weekly-financing-options"></div>
+                <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- Opciones Mensuales -->
+            <div class="financing-section">
+                <h4>Mensuales</h4>
+                <div id="monthly-financing-options"></div>
+                <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
+            </div>
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script>
+        // Al terminar la animación, mostrar el contenido
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.body.classList.add('show-content');
+                // Ocultar el header de animación
+                document.querySelector('.header').style.display = 'none';
+            }, 4500); // Tiempo total de las animaciones
+        });
+
+        // Función para togglear el menú
+        function toggleMenu() {
+            const menuDropdown = document.getElementById('menu-dropdown');
+            if (menuDropdown.style.display === 'block') {
+                menuDropdown.style.display = 'none';
+            } else {
+                menuDropdown.style.display = 'block';
+            }
+        }
+
+        // Cerrar el menú al hacer clic fuera de él
+        window.onclick = function (event) {
+            if (!event.target.matches('.menu-button') && !event.target.matches('.menu-button *')) {
+                const menuDropdown = document.getElementById('menu-dropdown');
+                if (menuDropdown.style.display === 'block') {
+                    menuDropdown.style.display = 'none';
+                }
+            }
+        }
+
+        // Filtrar productos por categoría
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Función para abrir el chat de WhatsApp
+        function openChat() {
+            const phoneNumber = '5493813198039'; // Número de WhatsApp
+            const url = `https://wa.me/${phoneNumber}`;
+            window.open(url, '_blank');
+        }
+
+        // Código para el modal de financiamiento
         let selectedFinancingOptionWeekly = null;
         let selectedFinancingOptionMonthly = null;
         let selectedProductName = '';
@@ -703,46 +818,8 @@
                 window.open(url, '_blank');
             }
         });
-
-        // Función para togglear el menú
-        function toggleMenu() {
-            const menuDropdown = document.getElementById('menu-dropdown');
-            if (menuDropdown.style.display === 'block') {
-                menuDropdown.style.display = 'none';
-            } else {
-                menuDropdown.style.display = 'block';
-            }
-        }
-
-        // Cerrar el menú al hacer clic fuera de él
-        window.onclick = function (event) {
-            if (!event.target.matches('.menu-button') && !event.target.matches('.menu-button *')) {
-                const menuDropdown = document.getElementById('menu-dropdown');
-                if (menuDropdown.style.display === 'block') {
-                    menuDropdown.style.display = 'none';
-                }
-            }
-        }
-
-        // Filtrar productos por categoría
-        function filterProducts(category) {
-            const products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        }
-
-        // Función para abrir el chat de WhatsApp
-        function openChat() {
-            const phoneNumber = '5493813198039'; // Número de WhatsApp
-            const url = `https://wa.me/${phoneNumber}`;
-            window.open(url, '_blank');
-        }
     </script>
 </body>
 
 </html>
+
