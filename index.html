@@ -8,23 +8,24 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #000;
+            color: #fff;
             margin: 0;
             padding: 0;
         }
 
         /* Header */
         .header {
-            background-color: #fff;
+            background-color: #000;
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
         }
 
         .header img {
             max-width: 200px;
             height: auto;
+            border: 5px solid #fff; /* Círculo blanco alrededor del logo */
+            border-radius: 50%;
         }
 
         /* Gallery */
@@ -34,28 +35,31 @@
             justify-content: center;
             gap: 20px;
             padding: 40px 20px;
-            background-color: #f4f4f4;
+            background-color: #000;
         }
 
         .product {
-            background: #fff;
+            background: #000;
             width: 220px;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #fff;
+            border: 1px solid #fff;
         }
 
         .product:hover {
             transform: translateY(-5px);
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.2);
         }
 
         .product img {
             width: 100%;
             height: auto;
             border-radius: 5px;
+            border: 1px solid #fff;
         }
 
         .product-info {
@@ -66,16 +70,17 @@
             font-size: 1.1rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: #fff;
         }
 
         .product-info .price {
             font-size: 1rem;
-            color: #e60000;
+            color: #fff;
             margin-bottom: 10px;
         }
 
         .product-info .financing-link {
-            color: #007bff;
+            color: #fff;
             text-decoration: none;
             cursor: pointer;
             font-size: 0.9rem;
@@ -92,19 +97,20 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #fff;
-            border: 1px solid #ccc;
+            background: #000;
+            border: 1px solid #fff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
             z-index: 1000;
             max-width: 500px;
             width: 90%;
+            color: #fff;
         }
 
         .financing h3 {
             margin-top: 0;
-            color: #333;
+            color: #fff;
         }
 
         .financing ul {
@@ -114,12 +120,12 @@
 
         .financing ul li {
             margin: 10px 0;
-            color: #333;
+            color: #fff;
         }
 
         .financing .close-btn {
-            background: #e60000;
-            color: #fff;
+            background: #fff;
+            color: #000;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
@@ -128,7 +134,7 @@
         }
 
         .financing .close-btn:hover {
-            background: #cc0000;
+            background: #ccc;
         }
 
         /* Overlay */
@@ -139,13 +145,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 999;
         }
 
         .overlay.active,
         .financing.active {
             display: block;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .contact .social-icons {
+            margin-top: 20px;
+        }
+
+        .contact .social-icons a {
+            font-size: 2rem;
+            margin: 0 15px;
         }
 
         /* Responsive Design */
@@ -167,202 +206,201 @@
     <div class="gallery">
         <!-- Producto 1 -->
         <div class="product">
-            <img src="producto1.png" alt="Producto 1">
+            <img src="producto1.png" alt="Poco c65 8-256gb">
             <div class="product-info">
-                <p class="name">Smartphone XYZ</p>
-                <p class="price">Precio contado: $285,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Smartphone XYZ', 285000)">Ver financiamiento</a>
+                <p class="name">Poco c65 8-256gb</p>
+                <p class="price">Precio contado: $285,000</p>
+                <a class="financing-link" onclick="showFinancing('Poco c65 8-256gb', 285000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 2 -->
         <div class="product">
-            <img src="producto2.png" alt="Producto 2">
+            <img src="producto2.png" alt="Go Spark 8 ram 128gb">
             <div class="product-info">
-                <p class="name">Laptop ABC</p>
-                <p class="price">Precio contado: $750,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Laptop ABC', 750000)">Ver financiamiento</a>
+                <p class="name">Go Spark 8 ram 128gb</p>
+                <p class="price">Precio contado: $205,000</p>
+                <a class="financing-link" onclick="showFinancing('Go Spark 8 ram 128gb', 205000)">Ver financiamiento</a>
             </div>
         </div>
 
-        <!-- Repite este bloque para los 20 productos -->
         <!-- Producto 3 -->
         <div class="product">
-            <img src="producto3.png" alt="Producto 3">
+            <img src="producto3.png" alt="Moto E13 64gb">
             <div class="product-info">
-                <p class="name">Tablet 123</p>
-                <p class="price">Precio contado: $350,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Tablet 123', 350000)">Ver financiamiento</a>
+                <p class="name">Moto E13 64gb</p>
+                <p class="price">Precio contado: $205,000</p>
+                <a class="financing-link" onclick="showFinancing('Moto E13 64gb', 205000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 4 -->
         <div class="product">
-            <img src="producto4.png" alt="Producto 4">
+            <img src="producto4.png" alt="Samsung A04e 32gb">
             <div class="product-info">
-                <p class="name">Televisor HD</p>
-                <p class="price">Precio contado: $1,200,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Televisor HD', 1200000)">Ver financiamiento</a>
+                <p class="name">Samsung A04e 32gb</p>
+                <p class="price">Precio contado: $215,000</p>
+                <a class="financing-link" onclick="showFinancing('Samsung A04e 32gb', 215000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 5 -->
         <div class="product">
-            <img src="producto5.png" alt="Producto 5">
+            <img src="producto5.png" alt="Samsung A05 64gb">
             <div class="product-info">
-                <p class="name">Auriculares Pro</p>
-                <p class="price">Precio contado: $85,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Auriculares Pro', 85000)">Ver financiamiento</a>
+                <p class="name">Samsung A05 64gb</p>
+                <p class="price">Precio contado: $230,000</p>
+                <a class="financing-link" onclick="showFinancing('Samsung A05 64gb', 230000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 6 -->
         <div class="product">
-            <img src="producto6.png" alt="Producto 6">
+            <img src="producto6.png" alt="Samsung a15 128/4 gb ram">
             <div class="product-info">
-                <p class="name">Smartwatch Elite</p>
-                <p class="price">Precio contado: $150,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Smartwatch Elite', 150000)">Ver financiamiento</a>
+                <p class="name">Samsung a15 128/4 gb ram</p>
+                <p class="price">Precio contado: $265,000</p>
+                <a class="financing-link" onclick="showFinancing('Samsung a15 128/4 gb ram', 265000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 7 -->
         <div class="product">
-            <img src="producto7.png" alt="Producto 7">
+            <img src="producto7.png" alt="Samsung a15 256/8gb ram">
             <div class="product-info">
-                <p class="name">Cámara DSLR</p>
-                <p class="price">Precio contado: $950,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Cámara DSLR', 950000)">Ver financiamiento</a>
+                <p class="name">Samsung a15 256/8gb ram</p>
+                <p class="price">Precio contado: $325,000</p>
+                <a class="financing-link" onclick="showFinancing('Samsung a15 256/8gb ram', 325000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 8 -->
         <div class="product">
-            <img src="producto8.png" alt="Producto 8">
+            <img src="producto8.png" alt="Samsung A25 128/6GB RAM">
             <div class="product-info">
-                <p class="name">Consola de Videojuegos</p>
-                <p class="price">Precio contado: $600,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Consola de Videojuegos', 600000)">Ver financiamiento</a>
+                <p class="name">Samsung A25 128/6GB RAM</p>
+                <p class="price">Precio contado: $395,000</p>
+                <a class="financing-link" onclick="showFinancing('Samsung A25 128/6GB RAM', 395000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 9 -->
         <div class="product">
-            <img src="producto9.png" alt="Producto 9">
+            <img src="producto9.png" alt="Redmi 13C 4/256gb">
             <div class="product-info">
-                <p class="name">Altavoces Bluetooth</p>
-                <p class="price">Precio contado: $110,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Altavoces Bluetooth', 110000)">Ver financiamiento</a>
+                <p class="name">Redmi 13C 4/256gb</p>
+                <p class="price">Precio contado: $255,000</p>
+                <a class="financing-link" onclick="showFinancing('Redmi 13C 4/256gb', 255000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 10 -->
         <div class="product">
-            <img src="producto10.png" alt="Producto 10">
+            <img src="producto10.png" alt="Hot 40pro 16-256 gb">
             <div class="product-info">
-                <p class="name">Monitor 4K</p>
-                <p class="price">Precio contado: $400,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Monitor 4K', 400000)">Ver financiamiento</a>
+                <p class="name">Hot 40pro 16-256 gb</p>
+                <p class="price">Precio contado: $335,000</p>
+                <a class="financing-link" onclick="showFinancing('Hot 40pro 16-256 gb', 335000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 11 -->
         <div class="product">
-            <img src="producto11.png" alt="Producto 11">
+            <img src="producto11.png" alt="Redmi note 13 8-256gb">
             <div class="product-info">
-                <p class="name">Impresora Multifuncional</p>
-                <p class="price">Precio contado: $250,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Impresora Multifuncional', 250000)">Ver financiamiento</a>
+                <p class="name">Redmi note 13 8-256gb</p>
+                <p class="price">Precio contado: $335,000</p>
+                <a class="financing-link" onclick="showFinancing('Redmi note 13 8-256gb', 335000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 12 -->
         <div class="product">
-            <img src="producto12.png" alt="Producto 12">
+            <img src="producto12.png" alt="Redmi a3 64gb">
             <div class="product-info">
-                <p class="name">Disco Duro Externo</p>
-                <p class="price">Precio contado: $90,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Disco Duro Externo', 90000)">Ver financiamiento</a>
+                <p class="name">Redmi a3 64gb</p>
+                <p class="price">Precio contado: $210,000</p>
+                <a class="financing-link" onclick="showFinancing('Redmi a3 64gb', 210000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 13 -->
         <div class="product">
-            <img src="producto13.png" alt="Producto 13">
+            <img src="producto13.png" alt="Redmi a3x 128gb">
             <div class="product-info">
-                <p class="name">Router Wi-Fi 6</p>
-                <p class="price">Precio contado: $130,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Router Wi-Fi 6', 130000)">Ver financiamiento</a>
+                <p class="name">Redmi a3x 128gb</p>
+                <p class="price">Precio contado: $220,000</p>
+                <a class="financing-link" onclick="showFinancing('Redmi a3x 128gb', 220000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 14 -->
         <div class="product">
-            <img src="producto14.png" alt="Producto 14">
+            <img src="producto14.png" alt="Moto g14 128gb">
             <div class="product-info">
-                <p class="name">Microondas Digital</p>
-                <p class="price">Precio contado: $180,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Microondas Digital', 180000)">Ver financiamiento</a>
+                <p class="name">Moto g14 128gb</p>
+                <p class="price">Precio contado: $240,000</p>
+                <a class="financing-link" onclick="showFinancing('Moto g14 128gb', 240000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 15 -->
         <div class="product">
-            <img src="producto15.png" alt="Producto 15">
+            <img src="producto15.png" alt="Moto g72 6-128gb">
             <div class="product-info">
-                <p class="name">Refrigerador Inverter</p>
-                <p class="price">Precio contado: $1,500,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Refrigerador Inverter', 1500000)">Ver financiamiento</a>
+                <p class="name">Moto g72 6-128gb</p>
+                <p class="price">Precio contado: $275,000</p>
+                <a class="financing-link" onclick="showFinancing('Moto g72 6-128gb', 275000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 16 -->
         <div class="product">
-            <img src="producto16.png" alt="Producto 16">
+            <img src="producto16.png" alt="Moto e14 64gb">
             <div class="product-info">
-                <p class="name">Lavadora Automática</p>
-                <p class="price">Precio contado: $1,000,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Lavadora Automática', 1000000)">Ver financiamiento</a>
+                <p class="name">Moto e14 64gb</p>
+                <p class="price">Precio contado: $210,000</p>
+                <a class="financing-link" onclick="showFinancing('Moto e14 64gb', 210000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 17 -->
         <div class="product">
-            <img src="producto17.png" alt="Producto 17">
+            <img src="producto17.png" alt="Moto g04 4-64gb">
             <div class="product-info">
-                <p class="name">Aspiradora Robot</p>
-                <p class="price">Precio contado: $300,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Aspiradora Robot', 300000)">Ver financiamiento</a>
+                <p class="name">Moto g04 4-64gb</p>
+                <p class="price">Precio contado: $225,000</p>
+                <a class="financing-link" onclick="showFinancing('Moto g04 4-64gb', 225000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 18 -->
         <div class="product">
-            <img src="producto18.png" alt="Producto 18">
+            <img src="producto18.png" alt="Note 13 pro 8/256">
             <div class="product-info">
-                <p class="name">Cafetera Espresso</p>
-                <p class="price">Precio contado: $220,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Cafetera Espresso', 220000)">Ver financiamiento</a>
+                <p class="name">Note 13 pro 8/256</p>
+                <p class="price">Precio contado: $385,000</p>
+                <a class="financing-link" onclick="showFinancing('Note 13 pro 8/256', 385000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 19 -->
         <div class="product">
-            <img src="producto19.png" alt="Producto 19">
+            <img src="producto19.png" alt="S23fe  5g 8-256">
             <div class="product-info">
-                <p class="name">Plancha de Vapor</p>
-                <p class="price">Precio contado: $70,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Plancha de Vapor', 70000)">Ver financiamiento</a>
+                <p class="name">S23fe  5g 8-256</p>
+                <p class="price">Precio contado: $725,000</p>
+                <a class="financing-link" onclick="showFinancing('S23fe  5g 8-256', 725000)">Ver financiamiento</a>
             </div>
         </div>
 
         <!-- Producto 20 -->
         <div class="product">
-            <img src="producto20.png" alt="Producto 20">
+            <img src="producto20.png" alt="Moto g24 128/4">
             <div class="product-info">
-                <p class="name">Secadora de Cabello</p>
-                <p class="price">Precio contado: $50,000.00</p>
-                <a class="financing-link" onclick="showFinancing('Secadora de Cabello', 50000)">Ver financiamiento</a>
+                <p class="name">Moto g24 128/4</p>
+                <p class="price">Precio contado: $250,000</p>
+                <a class="financing-link" onclick="showFinancing('Moto g24 128/4', 250000)">Ver financiamiento</a>
             </div>
         </div>
     </div>
@@ -374,6 +412,17 @@
         <h3 id="product-name"></h3>
         <p>Opciones de financiamiento:</p>
         <ul id="financing-options"></ul>
+    </div>
+
+    <!-- Sección de Contacto -->
+    <div class="contact">
+        <h2>¡Contáctanos!</h2>
+        <p>Email: <a href="mailto:techogar05@gmail.com">techogar05@gmail.com</a></p>
+        <div class="social-icons">
+            <a href="https://wa.me/3813198039" target="_blank">📱</a>
+            <a href="https://www.facebook.com/TecHogar05" target="_blank">📘</a>
+            <a href="https://www.instagram.com/techogarr/" target="_blank">📷</a>
+        </div>
     </div>
 
     <script>
@@ -389,8 +438,10 @@
             }
 
             const totalWithInterest = remainingBalance * (1 + interestRate / 100);
-            const installment = (totalWithInterest / term).toFixed(2);
-            return installment;
+            const installment = Math.ceil(totalWithInterest / term);
+            const formattedInstallment = installment.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+
+            return formattedInstallment;
         }
 
         function showFinancing(productName, price) {
@@ -404,7 +455,7 @@
             weeks.forEach(week => {
                 const installment = calculateInstallments(price, week, 'week');
                 const li = document.createElement("li");
-                li.textContent = `${week} semanas de $${installment}`;
+                li.textContent = `${week} semanas de ${installment}`;
                 financingOptions.appendChild(li);
             });
 
@@ -412,7 +463,7 @@
             months.forEach(month => {
                 const installment = calculateInstallments(price, month, 'month');
                 const li = document.createElement("li");
-                li.textContent = `${month} meses de $${installment}`;
+                li.textContent = `${month} meses de ${installment}`;
                 financingOptions.appendChild(li);
             });
 
