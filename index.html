@@ -4,245 +4,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Ropa Metálica - Profesional</title>
+    <title>TecHogar</title>
     <style>
-        /* Estilos Generales */
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #121212; /* Fondo negro para un estilo metálico */
-            color: #f0f0f0; /* Texto claro */
+            font-family: Arial, sans-serif;
+            background-color: #2f2f2f;
             margin: 0;
             padding: 0;
+            color: #f1f1f1;
         }
 
-        header {
-            background-color: #1a1a1a;
-            color: #f5c000; /* Dorado metálico */
-            text-align: center;
-            padding: 40px 0;
-            font-size: 2.5rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .productos {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .productos h2 {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #f5c000;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .galeria-productos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .producto {
-            background: #232323;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-            transition: transform 0.4s, box-shadow 0.4s;
-        }
-
-        .producto:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
-        }
-
-        .producto img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .producto-info {
+        .header {
+            background-color: #3d3d3d;
             padding: 20px;
             text-align: center;
         }
 
-        .producto-info h3 {
-            margin: 10px 0;
-            font-weight: bold;
-            color: #f5c000;
+        .header img {
+            max-width: 150px;
+            height: auto;
         }
 
-        .producto-info p {
-            color: #b0b0b0;
-            font-size: 1.1rem;
-        }
-
-        .formulario-pago {
-            max-width: 700px;
-            background-color: #232323;
-            padding: 40px;
-            margin: 60px auto;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-        }
-
-        .formulario-pago h2 {
-            text-align: center;
-            color: #f5c000;
-            font-size: 1.8rem;
-        }
-
-        .formulario-pago label {
-            display: block;
-            margin: 15px 0 5px;
-            font-weight: bold;
+        .header h1 {
             color: #e0e0e0;
+            margin: 0;
+            font-size: 2.5rem;
         }
 
-        .formulario-pago input[type="text"],
-        .formulario-pago select,
-        .formulario-pago textarea {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #1e1e1e;
-            color: #f5c000;
-            margin-bottom: 15px;
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
         }
 
-        .formulario-pago button {
-            margin-top: 20px;
-            width: 100%;
+        .product {
+            background: #4b3e38;
+            width: 200px;
             padding: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f5c000;
-            color: #1e1e1e;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5), inset 0px 0px 20px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        .formulario-pago button:hover {
-            background-color: #e6b800;
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.7), inset 0px 0px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product-info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .product-info .price {
+            font-size: 1.2rem;
+            color: #f5b041;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        Tienda de Ropa Metálica
-    </header>
+    <!-- Header con logotipo y título -->
+    <div class="header">
+        <img src="tu-logo-aqui.png" alt="Logotipo de TecHogar">
+        <h1>TecHogar</h1>
+    </div>
 
-    <!-- Sección de Productos -->
-    <section class="productos">
-        <h2>Chaquetas Metálicas</h2>
-        <div class="galeria-productos">
-            <div class="producto">
-                <img src="https://via.placeholder.com/300x400?text=Chaqueta+1" alt="Chaqueta Metálica 1">
-                <div class="producto-info">
-                    <h3>Chaqueta Metálica 1</h3>
-                    <p>$120 USD</p>
-                </div>
-            </div>
-
-            <div class="producto">
-                <img src="https://via.placeholder.com/300x400?text=Chaqueta+2" alt="Chaqueta Metálica 2">
-                <div class="producto-info">
-                    <h3>Chaqueta Metálica 2</h3>
-                    <p>$150 USD</p>
-                </div>
+    <!-- Galería de productos -->
+    <div class="gallery">
+        <!-- Cuadros de productos (20 en total) -->
+        <div class="product">
+            <img src="tu-imagen-aqui1.png" alt="Producto 1">
+            <div class="product-info">
+                <p class="price">$ 120.00</p>
             </div>
         </div>
-    </section>
-
-    <section class="productos">
-        <h2>Botas Metálicas</h2>
-        <div class="galeria-productos">
-            <div class="producto">
-                <img src="https://via.placeholder.com/300x400?text=Bota+1" alt="Bota Metálica 1">
-                <div class="producto-info">
-                    <h3>Bota Metálica 1</h3>
-                    <p>$85 USD</p>
-                </div>
-            </div>
-
-            <div class="producto">
-                <img src="https://via.placeholder.com/300x400?text=Bota+2" alt="Bota Metálica 2">
-                <div class="producto-info">
-                    <h3>Bota Metálica 2</h3>
-                    <p>$90 USD</p>
-                </div>
+        <div class="product">
+            <img src="tu-imagen-aqui2.png" alt="Producto 2">
+            <div class="product-info">
+                <p class="price">$ 150.00</p>
             </div>
         </div>
-    </section>
-
-    <section class="productos">
-        <h2>Accesorios para el Ropero</h2>
-        <div class="galeria-productos">
-            <div class="producto">
-                <img src="https://via.placeholder.com/300x400?text=Cinturón+1" alt="Cinturón de Metal">
-                <div class="producto-info">
-                    <h3>Cinturón de Metal</h3>
-                    <p>$40 USD</p>
-                </div>
-            </div>
-
-            <div class="producto">
-                <img src="https://via.placeholder.com/300x400?text=Pulsera+1" alt="Pulsera de Cuero">
-                <div class="producto-info">
-                    <h3>Pulsera de Cuero y Metal</h3>
-                    <p>$25 USD</p>
-                </div>
+        <div class="product">
+            <img src="tu-imagen-aqui3.png" alt="Producto 3">
+            <div class="product-info">
+                <p class="price">$ 180.00</p>
             </div>
         </div>
-    </section>
-
-    <!-- Formulario de Selección de Pago y Comentarios -->
-    <section class="formulario-pago">
-        <h2>Forma de Pago</h2>
-        <form id="form-pago">
-            <label for="nombre-cliente">Nombre del Cliente:</label>
-            <input type="text" id="nombre-cliente" name="nombre-cliente" required>
-
-            <label for="metodo-pago">Selecciona el Método de Pago:</label>
-            <select id="metodo-pago" name="metodo-pago" required>
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="contado">Pago de Contado</option>
-                <option value="tarjeta">Tarjeta de Crédito/Débito</option>
-                <option value="transferencia">Transferencia Bancaria</option>
-            </select>
-
-            <label for="comentarios">Comentario del Cliente:</label>
-            <textarea id="comentarios" name="comentarios" rows="4" placeholder="Dejanos un comentario sobre tu experiencia..."></textarea>
-
-            <button type="submit">Confirmar Pedido</button>
-        </form>
-    </section>
-
-    <!-- Script para manejar el formulario de pago -->
-    <script>
-        document.getElementById('form-pago').addEventListener('submit', function (event) {
-            event.preventDefault(); // Evita el envío automático del formulario
-
-            const nombreCliente = document.getElementById('nombre-cliente').value;
-            const metodoPago = document.getElementById('metodo-pago').value;
-            const comentarios = document.getElementById('comentarios').value;
-
-            if (nombreCliente && metodoPago) {
-                alert(`Gracias ${nombreCliente}, tu pedido se ha confirmado.\nMétodo de pago seleccionado: ${metodoPago}\nComentario: ${comentarios ? comentarios : 'Sin comentario'}`);
-                this.reset(); // Limpia el formulario después de enviarlo
-            } else {
-                alert('Por favor, completa todos los campos obligatorios');
-            }
-        });
-    </script>
+        <div class="product">
+            <img src="tu-imagen-aqui4.png" alt="Producto 4">
+            <div class="product-info">
+                <p class="price">$ 200.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui5.png" alt="Producto 5">
+            <div class="product-info">
+                <p class="price">$ 175.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui6.png" alt="Producto 6">
+            <div class="product-info">
+                <p class="price">$ 220.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui7.png" alt="Producto 7">
+            <div class="product-info">
+                <p class="price">$ 199.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui8.png" alt="Producto 8">
+            <div class="product-info">
+                <p class="price">$ 250.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui9.png" alt="Producto 9">
+            <div class="product-info">
+                <p class="price">$ 300.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui10.png" alt="Producto 10">
+            <div class="product-info">
+                <p class="price">$ 275.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui11.png" alt="Producto 11">
+            <div class="product-info">
+                <p class="price">$ 320.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui12.png" alt="Producto 12">
+            <div class="product-info">
+                <p class="price">$ 290.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui13.png" alt="Producto 13">
+            <div class="product-info">
+                <p class="price">$ 350.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui14.png" alt="Producto 14">
+            <div class="product-info">
+                <p class="price">$ 310.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui15.png" alt="Producto 15">
+            <div class="product-info">
+                <p class="price">$ 400.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui16.png" alt="Producto 16">
+            <div class="product-info">
+                <p class="price">$ 380.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui17.png" alt="Producto 17">
+            <div class="product-info">
+                <p class="price">$ 420.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui18.png" alt="Producto 18">
+            <div class="product-info">
+                <p class="price">$ 450.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui19.png" alt="Producto 19">
+            <div class="product-info">
+                <p class="price">$ 499.00</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="tu-imagen-aqui20.png" alt="Producto 20">
+            <div class="product-info">
+                <p class="price">$ 520.00</p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
