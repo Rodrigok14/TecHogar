@@ -19,8 +19,6 @@
             background-color: #3d3d3d;
             padding: 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .header img {
@@ -36,12 +34,6 @@
             }
         }
 
-        .header h1 {
-            color: #e0e0e0;
-            margin: 10px 0 0;
-            font-size: 2.5rem;
-        }
-
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -55,8 +47,22 @@
             width: 200px;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5), inset 0px 0px 20px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
+            position: relative;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5), inset 0px 0px 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 5px solid #c19a6b; /* Color madera */
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.5); /* Efecto de luz */
+            z-index: -1;
         }
 
         .product:hover {
@@ -79,6 +85,50 @@
             font-size: 1.2rem;
             color: #f5b041;
         }
+
+        .financing {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 2px solid #f5b041;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .financing h3 {
+            color: #f5b041;
+        }
+
+        .financing ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .financing ul li {
+            margin: 10px 0;
+            color: #e0e0e0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+
+        .overlay.active,
+        .financing.active {
+            display: block;
+        }
     </style>
 </head>
 
@@ -86,133 +136,61 @@
     <!-- Header con logotipo y título -->
     <div class="header">
         <img src="https://imgur.com/fUKxUTj.png" alt="TecHogar Logo">
-        <h1>TecHogar</h1>
     </div>
 
     <!-- Galería de productos -->
     <div class="gallery">
         <!-- Lista de productos -->
-        <div class="product">
+        <div class="product" onclick="showFinancing('Poco c65 8-256gb', 285000)">
             <img src="tu-imagen-aqui1.png" alt="Poco c65 8-256gb">
             <div class="product-info">
                 <p class="price">$ 285,000.00</p>
             </div>
         </div>
-        <div class="product">
-            <img src="tu-imagen-aqui2.png" alt="Go Spark 8 ram 128gb">
-            <div class="product-info">
-                <p class="price">$ 205,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui3.png" alt="Moto E13 64gb">
-            <div class="product-info">
-                <p class="price">$ 205,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui4.png" alt="Samsung A04e 32gb">
-            <div class="product-info">
-                <p class="price">$ 215,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui5.png" alt="Samsung A05 64gb">
-            <div class="product-info">
-                <p class="price">$ 230,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui6.png" alt="Samsung a15 128/4 gb ram">
-            <div class="product-info">
-                <p class="price">$ 265,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui7.png" alt="Samsung a15 256/8gb ram">
-            <div class="product-info">
-                <p class="price">$ 325,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui8.png" alt="Samsung A25 128/6GB RAM">
-            <div class="product-info">
-                <p class="price">$ 395,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui9.png" alt="Redmi 13C 4/256gb">
-            <div class="product-info">
-                <p class="price">$ 255,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui10.png" alt="Hot 40pro 16-256 gb">
-            <div class="product-info">
-                <p class="price">$ 335,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui11.png" alt="Redmi note 13 8-256gb">
-            <div class="product-info">
-                <p class="price">$ 335,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui12.png" alt="Redmi a3 64gb">
-            <div class="product-info">
-                <p class="price">$ 210,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui13.png" alt="Redmi a3x 128gb">
-            <div class="product-info">
-                <p class="price">$ 220,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui14.png" alt="Moto g14 128gb">
-            <div class="product-info">
-                <p class="price">$ 240,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui15.png" alt="Moto g72 6-128gb">
-            <div class="product-info">
-                <p class="price">$ 275,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui16.png" alt="Moto e14 64gb">
-            <div class="product-info">
-                <p class="price">$ 210,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui17.png" alt="Moto g04 4-64gb">
-            <div class="product-info">
-                <p class="price">$ 225,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui18.png" alt="Note 13 pro 8/256">
-            <div class="product-info">
-                <p class="price">$ 385,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui19.png" alt="S23fe  5g 8-256">
-            <div class="product-info">
-                <p class="price">$ 725,000.00</p>
-            </div>
-        </div>
-        <div class="product">
-            <img src="tu-imagen-aqui20.png" alt="Moto g24 128/4">
-            <div class="product-info">
-                <p class="price">$ 250,000.00</p>
-            </div>
-        </div>
+        <!-- Puedes añadir más productos aquí -->
     </div>
+
+    <!-- Overlay para el financiamiento -->
+    <div class="overlay" onclick="closeFinancing()"></div>
+    <div class="financing" id="financing">
+        <h3 id="product-name"></h3>
+        <p>Opciones de financiamiento:</p>
+        <ul id="financing-options"></ul>
+    </div>
+
+    <script>
+        function showFinancing(productName, price) {
+            const financingOptions = document.getElementById("financing-options");
+            financingOptions.innerHTML = ""; // Limpiar las opciones previas
+
+            const weeks = [4, 8, 12, 16, 20];
+            const months = [1, 2, 3, 4, 5];
+
+            // Generar opciones de financiamiento
+            weeks.forEach(week => {
+                const weeklyPayment = (price / week).toFixed(2);
+                const li = document.createElement("li");
+                li.textContent = `${week} semanas - $${weeklyPayment} por semana`;
+                financingOptions.appendChild(li);
+            });
+
+            months.forEach(month => {
+                const monthlyPayment = (price / month).toFixed(2);
+                const li = document.createElement("li");
+                li.textContent = `${month} meses - $${monthlyPayment} por mes`;
+                financingOptions.appendChild(li);
+            });
+
+            document.getElementById("product-name").textContent = productName;
+            document.querySelector(".overlay").classList.add("active");
+            document.getElementById("financing").classList.add("active");
+        }
+
+        function closeFinancing() {
+            document.querySelector(".overlay").classList.remove("active");
+            document.getElementById("financing").classList.remove("active");
+        }
+    </script>
 </body>
 
 </html>
