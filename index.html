@@ -15,33 +15,13 @@
             padding: 0;
         }
 
-        /* Header */
+        /* Header con logo centrado */
         .header {
             background-color: #000;
             padding: 20px;
+            text-align: center;
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        /* Menú de navegación */
-        .nav-menu {
-            display: flex;
-            gap: 20px;
-            margin-left: 20px;
-        }
-
-        .nav-menu a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .nav-menu a:hover {
-            text-decoration: underline;
         }
 
         .header img {
@@ -78,6 +58,26 @@
             to {
                 filter: brightness(0) invert(1);
             }
+        }
+
+        /* Menú de navegación */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 10px 0;
+        }
+
+        .nav-menu a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            text-decoration: underline;
         }
 
         /* Galería */
@@ -166,13 +166,7 @@
         }
 
         .financing .financing-options {
-            display: flex;
-            justify-content: space-between;
             margin-top: 20px;
-        }
-
-        .financing .financing-options div {
-            width: 48%;
         }
 
         .financing p {
@@ -185,18 +179,17 @@
             margin-bottom: 15px;
         }
 
-        /* Opciones de financiamiento seleccionables */
+        /* Opciones de financiamiento con círculos */
         .financing-option {
-            border: 1px solid #000;
-            border-radius: 5px;
-            padding: 10px;
+            display: flex;
+            align-items: center;
             margin-bottom: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
-        .financing-option.selected {
-            background-color: #ddd;
+        .financing-option input {
+            margin-right: 10px;
+            cursor: pointer;
         }
 
         /* Botón para enviar por WhatsApp */
@@ -293,41 +286,38 @@
             .product {
                 width: 48%;
             }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-menu a {
+                margin: 10px 0;
+            }
         }
 
         @media (max-width: 400px) {
             .product {
                 width: 100%;
             }
-
-            .financing .financing-options {
-                flex-direction: column;
-            }
-
-            .financing .financing-options div {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .nav-menu {
-                flex-direction: column;
-                margin-left: 0;
-            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header con logotipo y menú -->
+    <!-- Header con logo centrado -->
     <div class="header">
-        <div class="nav-menu">
-            <a href="#" onclick="filterProducts('all')">Todos</a>
-            <a href="#" onclick="filterProducts('celulares')">Celulares</a>
-            <a href="#" onclick="filterProducts('muebles')">Muebles</a>
-            <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
-        </div>
         <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo">
         <div class="line-effect"></div>
+    </div>
+
+    <!-- Menú de navegación -->
+    <div class="nav-menu">
+        <a href="#" onclick="filterProducts('all')">Todos</a>
+        <a href="#" onclick="filterProducts('celulares')">Celulares</a>
+        <a href="#" onclick="filterProducts('muebles')">Muebles</a>
+        <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
     </div>
 
     <!-- Galería de productos -->
@@ -343,7 +333,7 @@
             </div>
         </div>
 
-        <!-- Producto 2 -->
+         <!-- Producto 2 -->
         <div class="product" data-category="celulares">
             <img src="producto2.png" alt="Go Spark 8 ram 128gb">
             <div class="product-info">
@@ -566,15 +556,8 @@
         <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
         <h3 id="product-name"></h3>
         <p class="instruction">Selecciona una opción de financiamiento:</p>
-        <div class="financing-options">
-            <div>
-                <h4>Semanales</h4>
-                <div id="weekly-financing-options"></div>
-            </div>
-            <div>
-                <h4>Mensuales</h4>
-                <div id="monthly-financing-options"></div>
-            </div>
+        <div class="financing-options" id="financing-options">
+            <!-- Las opciones se generan dinámicamente -->
         </div>
         <button class="whatsapp-button" id="whatsapp-button">Enviar por WhatsApp</button>
     </div>
@@ -631,32 +614,48 @@
             selectedProductPrice = price;
             selectedFinancingOption = null;
 
-            const weeklyOptionsContainer = document.getElementById("weekly-financing-options");
-            const monthlyOptionsContainer = document.getElementById("monthly-financing-options");
-            weeklyOptionsContainer.innerHTML = "";
-            monthlyOptionsContainer.innerHTML = "";
+            const financingOptionsContainer = document.getElementById("financing-options");
+            financingOptionsContainer.innerHTML = "";
 
             const weeks = [4, 8, 12, 16, 20];
             const months = [1, 2, 3, 4, 5];
 
-            // Opciones de financiamiento semanal
+            // Crear una lista combinada de opciones
+            const options = [];
+
             weeks.forEach(week => {
                 const installment = calculateInstallments(price, week, 'week');
-                const div = document.createElement("div");
-                div.classList.add('financing-option');
-                div.textContent = `${week} semanas de ${installment}`;
-                div.onclick = (event) => selectFinancingOption(event, `${week} semanas de ${installment}`);
-                weeklyOptionsContainer.appendChild(div);
+                options.push({
+                    text: `${week} semanas de ${installment}`,
+                    value: `${week} semanas de ${installment}`
+                });
             });
 
-            // Opciones de financiamiento mensual
             months.forEach(month => {
                 const installment = calculateInstallments(price, month, 'month');
-                const div = document.createElement("div");
-                div.classList.add('financing-option');
-                div.textContent = `${month} meses de ${installment}`;
-                div.onclick = (event) => selectFinancingOption(event, `${month} meses de ${installment}`);
-                monthlyOptionsContainer.appendChild(div);
+                options.push({
+                    text: `${month} meses de ${installment}`,
+                    value: `${month} meses de ${installment}`
+                });
+            });
+
+            // Generar las opciones con círculos (radio buttons)
+            options.forEach((option, index) => {
+                const label = document.createElement('label');
+                label.classList.add('financing-option');
+
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'financing';
+                input.value = option.value;
+                input.onclick = (event) => selectFinancingOption(event, option.value);
+
+                const span = document.createElement('span');
+                span.textContent = option.text;
+
+                label.appendChild(input);
+                label.appendChild(span);
+                financingOptionsContainer.appendChild(label);
             });
 
             document.getElementById("product-name").textContent = `Financiamiento para: ${productName}`;
@@ -668,13 +667,6 @@
         }
 
         function selectFinancingOption(event, optionText) {
-            // Remover la clase 'selected' de todas las opciones
-            document.querySelectorAll('.financing-option').forEach(elem => {
-                elem.classList.remove('selected');
-            });
-
-            // Añadir la clase 'selected' a la opción seleccionada
-            event.currentTarget.classList.add('selected');
             selectedFinancingOption = optionText;
 
             // Mostrar el botón de WhatsApp
