@@ -9,20 +9,22 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #000;
+            color: #fff;
             margin: 0;
             padding: 0;
-            color: #f1f1f1;
-            background: radial-gradient(circle at center, #1a1a1a, #000 80%);
+            background-image: url('background.png'); /* Imagen de fondo con detalles de TecHogar */
+            background-size: cover;
+            background-repeat: repeat;
         }
 
         .header {
-            background-color: #3d3d3d;
+            background-color: #000;
             padding: 20px;
             text-align: center;
         }
 
         .header img {
-            max-width: 300px; /* Tamaño ajustado del logotipo */
+            max-width: 350px; /* Logo más grande */
             height: auto;
             opacity: 0;
             animation: fadeIn 2s forwards;
@@ -43,31 +45,19 @@
         }
 
         .product {
-            background: #4b3e38;
-            width: 220px;
+            background: #fff; /* Fondo blanco */
+            width: 200px;
             padding: 15px;
             border-radius: 10px;
             position: relative;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5), inset 0px 0px 10px rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5), inset 0px 0px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 5px solid #c19a6b; /* Color madera */
-            border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.5); /* Efecto de luz */
-            z-index: -1;
+            color: #000; /* Texto en negro */
         }
 
         .product:hover {
             transform: translateY(-5px);
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.7), inset 0px 0px 25px rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.7), inset 0px 0px 25px rgba(0, 0, 0, 0.2);
         }
 
         .product img {
@@ -83,14 +73,21 @@
 
         .product-info .price {
             font-size: 1.2rem;
-            color: #f5b041;
+            color: #000;
         }
 
         .product-info .financing-link {
-            color: #f5b041;
+            color: #000;
             text-decoration: underline;
             cursor: pointer;
             font-size: 0.9rem;
+        }
+
+        /* Diseño responsive */
+        @media (max-width: 600px) {
+            .product {
+                width: 100%;
+            }
         }
 
         .financing {
@@ -99,16 +96,19 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #1a1a1a;
-            border: 2px solid #f5b041;
+            background: #fff;
+            border: 2px solid #000;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.7);
             z-index: 1000;
+            color: #000;
+            max-width: 90%;
+            overflow-y: auto;
         }
 
         .financing h3 {
-            color: #f5b041;
+            color: #000;
         }
 
         .financing ul {
@@ -118,7 +118,7 @@
 
         .financing ul li {
             margin: 10px 0;
-            color: #e0e0e0;
+            color: #000;
         }
 
         .overlay {
@@ -140,22 +140,23 @@
 </head>
 
 <body>
-    <!-- Header con logotipo y título -->
+    <!-- Header con logotipo -->
     <div class="header">
-        <img src="https://imgur.com/fUKxUTj.png" alt="TecHogar Logo">
+        <img src="logo-placeholder.png" alt="TecHogar Logo">
     </div>
 
     <!-- Galería de productos -->
     <div class="gallery">
-        <!-- Lista de productos -->
+        <!-- Ejemplo de producto -->
         <div class="product">
-            <img src="tu-imagen-aqui1.png" alt="Poco c65 8-256gb">
+            <img src="producto1.png" alt="Poco c65 8-256gb">
             <div class="product-info">
                 <p class="price">Precio contado: $285,000.00</p>
                 <span class="financing-link" onclick="showFinancing('Poco c65 8-256gb', 285000)">Ver financiamiento</span>
             </div>
         </div>
-        <!-- Puedes añadir más productos aquí -->
+        <!-- Repite este bloque para los 20 productos -->
+        <!-- ... Añade más productos aquí ... -->
     </div>
 
     <!-- Overlay para el financiamiento -->
@@ -167,18 +168,20 @@
     </div>
 
     <script>
-        function calculateInstallments(price, weeksOrMonths, type) {
+        function calculateInstallments(price, term, type) {
             const initialPayment = price * 0.3; // 30% de entrada
             const remainingBalance = price - initialPayment;
-            const interestRate = type === 'week' ? (13 * (weeksOrMonths / 4)) : (13 * weeksOrMonths);
-            const totalWithInterest = remainingBalance * (1 + interestRate / 100);
-            const installment = (totalWithInterest / weeksOrMonths).toFixed(2);
+            let interestRate;
 
-            return {
-                initialPayment: initialPayment.toFixed(2),
-                installment: installment,
-                totalWithInterest: totalWithInterest.toFixed(2)
-            };
+            if (type === 'week') {
+                interestRate = 13 * (term / 4);
+            } else {
+                interestRate = 13 * term;
+            }
+
+            const totalWithInterest = remainingBalance * (1 + interestRate / 100);
+            const installment = (totalWithInterest / term).toFixed(2);
+            return installment;
         }
 
         function showFinancing(productName, price) {
@@ -190,17 +193,17 @@
 
             // Generar opciones de financiamiento semanal
             weeks.forEach(week => {
-                const { initialPayment, installment, totalWithInterest } = calculateInstallments(price, week, 'week');
+                const installment = calculateInstallments(price, week, 'week');
                 const li = document.createElement("li");
-                li.textContent = `${week} semanas - Entrada: $${initialPayment}, Cuotas: $${installment} (Total: $${totalWithInterest})`;
+                li.textContent = `${week} semanas de $${installment}`;
                 financingOptions.appendChild(li);
             });
 
             // Generar opciones de financiamiento mensual
             months.forEach(month => {
-                const { initialPayment, installment, totalWithInterest } = calculateInstallments(price, month, 'month');
+                const installment = calculateInstallments(price, month, 'month');
                 const li = document.createElement("li");
-                li.textContent = `${month} meses - Entrada: $${initialPayment}, Cuotas: $${installment} (Total: $${totalWithInterest})`;
+                li.textContent = `${month} meses de $${installment}`;
                 financingOptions.appendChild(li);
             });
 
