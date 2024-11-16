@@ -22,6 +22,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            height: 250px;
         }
 
         .header img {
@@ -30,11 +31,11 @@
             border: 5px solid #fff; /* Círculo blanco alrededor del logo */
             border-radius: 50%;
             position: relative;
-            z-index: 1;
-            animation: logoEffect 3s forwards;
+            z-index: 2;
+            animation: logoEffect 3s forwards 3s;
         }
 
-        /* Efecto de líneas que llegan al logo */
+        /* Efecto de líneas que llegan al logo y se convierten en flecha */
         .line-effect {
             position: absolute;
             top: 50%;
@@ -43,6 +44,22 @@
             height: 2px;
             background: linear-gradient(to right, transparent, #fff, transparent);
             animation: lineMove 3s forwards;
+            z-index: 1;
+        }
+
+        .line-effect:nth-child(1) {
+            top: 40%;
+            animation-delay: 0s;
+        }
+
+        .line-effect:nth-child(2) {
+            top: 50%;
+            animation-delay: 0.5s;
+        }
+
+        .line-effect:nth-child(3) {
+            top: 60%;
+            animation-delay: 1s;
         }
 
         @keyframes lineMove {
@@ -60,24 +77,63 @@
             }
         }
 
+        /* Flecha hacia abajo */
+        .arrow-down {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid #fff;
+            animation: arrowEffect 2s forwards 6s;
+            z-index: 1;
+        }
+
+        @keyframes arrowEffect {
+            from {
+                opacity: 0;
+                top: 50%;
+            }
+            to {
+                opacity: 1;
+                top: 80%;
+            }
+        }
+
         /* Menú de navegación */
         .nav-menu {
             display: flex;
-            justify-content: center;
+            align-items: center;
             background-color: #fff;
-            padding: 10px 0;
+            padding: 10px 20px;
         }
 
         .nav-menu a {
             color: #000;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 1rem;
-            cursor: pointer;
+            margin-right: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            position: relative;
         }
 
-        .nav-menu a:hover {
-            text-decoration: underline;
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         /* Galería */
@@ -169,17 +225,19 @@
             margin-top: 20px;
         }
 
-        .financing p {
-            font-size: 1rem;
+        .financing .separator {
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .financing-section {
+            margin-bottom: 20px;
+        }
+
+        .financing-section h4 {
             margin-bottom: 10px;
         }
 
-        .financing .instruction {
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        /* Opciones de financiamiento con círculos */
         .financing-option {
             display: flex;
             align-items: center;
@@ -201,12 +259,12 @@
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 1rem;
         }
 
         .whatsapp-button.show {
-            display: block;
+            display: inline-block;
         }
 
         .financing .close-btn {
@@ -289,7 +347,7 @@
 
             .nav-menu {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
             }
 
             .nav-menu a {
@@ -306,13 +364,16 @@
 </head>
 
 <body>
-    <!-- Header con logo centrado -->
+    <!-- Header con logo centrado y líneas -->
     <div class="header">
         <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo">
         <div class="line-effect"></div>
+        <div class="line-effect"></div>
+        <div class="line-effect"></div>
+        <div class="arrow-down"></div>
     </div>
 
-    <!-- Menú de navegación -->
+    <!-- Menú de navegación alineado a la izquierda -->
     <div class="nav-menu">
         <a href="#" onclick="filterProducts('all')">Todos</a>
         <a href="#" onclick="filterProducts('celulares')">Celulares</a>
@@ -320,7 +381,7 @@
         <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
     </div>
 
-    <!-- Galería de productos -->
+     <!-- Galería de productos -->
     <div class="gallery">
         <!-- Celulares -->
         <!-- Producto 1 -->
@@ -556,10 +617,22 @@
         <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
         <h3 id="product-name"></h3>
         <p class="instruction">Selecciona una opción de financiamiento:</p>
-        <div class="financing-options" id="financing-options">
-            <!-- Las opciones se generan dinámicamente -->
+
+        <!-- Opciones Semanales -->
+        <div class="financing-section">
+            <h4>Semanales</h4>
+            <div id="weekly-financing-options"></div>
+            <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
         </div>
-        <button class="whatsapp-button" id="whatsapp-button">Enviar por WhatsApp</button>
+
+        <div class="separator"></div>
+
+        <!-- Opciones Mensuales -->
+        <div class="financing-section">
+            <h4>Mensuales</h4>
+            <div id="monthly-financing-options"></div>
+            <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
+        </div>
     </div>
 
     <!-- Sección de Contacto -->
@@ -583,7 +656,8 @@
     </div>
 
     <script>
-        let selectedFinancingOption = null;
+        let selectedFinancingOptionWeekly = null;
+        let selectedFinancingOptionMonthly = null;
         let selectedProductName = '';
         let selectedProductPrice = 0;
 
@@ -612,65 +686,74 @@
         function showFinancing(productName, price) {
             selectedProductName = productName;
             selectedProductPrice = price;
-            selectedFinancingOption = null;
+            selectedFinancingOptionWeekly = null;
+            selectedFinancingOptionMonthly = null;
 
-            const financingOptionsContainer = document.getElementById("financing-options");
-            financingOptionsContainer.innerHTML = "";
+            const weeklyOptionsContainer = document.getElementById("weekly-financing-options");
+            const monthlyOptionsContainer = document.getElementById("monthly-financing-options");
+            weeklyOptionsContainer.innerHTML = "";
+            monthlyOptionsContainer.innerHTML = "";
 
             const weeks = [4, 8, 12, 16, 20];
             const months = [1, 2, 3, 4, 5];
 
-            // Crear una lista combinada de opciones
-            const options = [];
-
+            // Opciones semanales
             weeks.forEach(week => {
                 const installment = calculateInstallments(price, week, 'week');
-                options.push({
-                    text: `${week} semanas de ${installment}`,
-                    value: `${week} semanas de ${installment}`
-                });
-            });
-
-            months.forEach(month => {
-                const installment = calculateInstallments(price, month, 'month');
-                options.push({
-                    text: `${month} meses de ${installment}`,
-                    value: `${month} meses de ${installment}`
-                });
-            });
-
-            // Generar las opciones con círculos (radio buttons)
-            options.forEach((option, index) => {
                 const label = document.createElement('label');
                 label.classList.add('financing-option');
 
                 const input = document.createElement('input');
                 input.type = 'radio';
-                input.name = 'financing';
-                input.value = option.value;
-                input.onclick = (event) => selectFinancingOption(event, option.value);
+                input.name = 'financing-weekly';
+                input.value = `${week} semanas de ${installment}`;
+                input.onclick = (event) => selectFinancingOption(event, input.value, 'weekly');
 
                 const span = document.createElement('span');
-                span.textContent = option.text;
+                span.textContent = `${week} semanas de ${installment}`;
 
                 label.appendChild(input);
                 label.appendChild(span);
-                financingOptionsContainer.appendChild(label);
+                weeklyOptionsContainer.appendChild(label);
+            });
+
+            // Opciones mensuales
+            months.forEach(month => {
+                const installment = calculateInstallments(price, month, 'month');
+                const label = document.createElement('label');
+                label.classList.add('financing-option');
+
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'financing-monthly';
+                input.value = `${month} meses de ${installment}`;
+                input.onclick = (event) => selectFinancingOption(event, input.value, 'monthly');
+
+                const span = document.createElement('span');
+                span.textContent = `${month} meses de ${installment}`;
+
+                label.appendChild(input);
+                label.appendChild(span);
+                monthlyOptionsContainer.appendChild(label);
             });
 
             document.getElementById("product-name").textContent = `Financiamiento para: ${productName}`;
             document.querySelector(".overlay").classList.add("active");
             document.getElementById("financing").classList.add("active");
 
-            // Ocultar el botón de WhatsApp hasta que se seleccione una opción
-            document.getElementById("whatsapp-button").classList.remove('show');
+            // Ocultar los botones de WhatsApp hasta que se seleccione una opción
+            document.getElementById("whatsapp-button-weekly").classList.remove('show');
+            document.getElementById("whatsapp-button-monthly").classList.remove('show');
         }
 
-        function selectFinancingOption(event, optionText) {
-            selectedFinancingOption = optionText;
-
-            // Mostrar el botón de WhatsApp
-            document.getElementById("whatsapp-button").classList.add('show');
+        function selectFinancingOption(event, optionText, type) {
+            if (type === 'weekly') {
+                selectedFinancingOptionWeekly = optionText;
+                document.getElementById("whatsapp-button-weekly").classList.add('show');
+            } else {
+                selectedFinancingOptionMonthly = optionText;
+                document.getElementById("whatsapp-button-monthly").classList.add('show');
+            }
         }
 
         function closeFinancing() {
@@ -678,11 +761,21 @@
             document.getElementById("financing").classList.remove("active");
         }
 
-        // Enviar mensaje por WhatsApp
-        document.getElementById("whatsapp-button").addEventListener('click', function () {
-            if (selectedFinancingOption) {
-                const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOption}.`;
-                const phoneNumber = '5493813198039'; // Número de WhatsApp sin '+' ni espacios
+        // Enviar mensaje por WhatsApp - Semanal
+        document.getElementById("whatsapp-button-weekly").addEventListener('click', function () {
+            if (selectedFinancingOptionWeekly) {
+                const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionWeekly}.`;
+                const phoneNumber = '5493813198039';
+                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.open(url, '_blank');
+            }
+        });
+
+        // Enviar mensaje por WhatsApp - Mensual
+        document.getElementById("whatsapp-button-monthly").addEventListener('click', function () {
+            if (selectedFinancingOptionMonthly) {
+                const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionMonthly}.`;
+                const phoneNumber = '5493813198039';
                 const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
                 window.open(url, '_blank');
             }
@@ -703,3 +796,4 @@
 </body>
 
 </html>
+
