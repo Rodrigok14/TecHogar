@@ -8,26 +8,37 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #2f2f2f;
+            background-color: #000;
             margin: 0;
             padding: 0;
             color: #f1f1f1;
+            background: radial-gradient(circle at center, #1a1a1a, #000 80%);
         }
 
         .header {
             background-color: #3d3d3d;
             padding: 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .header img {
-            max-width: 150px;
+            max-width: 200px;
             height: auto;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
         .header h1 {
             color: #e0e0e0;
-            margin: 0;
+            margin: 10px 0 0;
             font-size: 2.5rem;
         }
 
@@ -74,131 +85,131 @@
 <body>
     <!-- Header con logotipo y título -->
     <div class="header">
-
+        <img src="https://imgur.com/fUKxUTj.png" alt="TecHogar Logo">
         <h1>TecHogar</h1>
     </div>
 
     <!-- Galería de productos -->
     <div class="gallery">
-        <!-- Cuadros de productos (20 en total) -->
+        <!-- Lista de productos -->
         <div class="product">
-            <img src="tu-imagen-aqui1.png" alt="Producto 1">
+            <img src="tu-imagen-aqui1.png" alt="Poco c65 8-256gb">
             <div class="product-info">
-                <p class="price">$ 120.00</p>
+                <p class="price">$ 285,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui2.png" alt="Producto 2">
+            <img src="tu-imagen-aqui2.png" alt="Go Spark 8 ram 128gb">
             <div class="product-info">
-                <p class="price">$ 150.00</p>
+                <p class="price">$ 205,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui3.png" alt="Producto 3">
+            <img src="tu-imagen-aqui3.png" alt="Moto E13 64gb">
             <div class="product-info">
-                <p class="price">$ 180.00</p>
+                <p class="price">$ 205,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui4.png" alt="Producto 4">
+            <img src="tu-imagen-aqui4.png" alt="Samsung A04e 32gb">
             <div class="product-info">
-                <p class="price">$ 200.00</p>
+                <p class="price">$ 215,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui5.png" alt="Producto 5">
+            <img src="tu-imagen-aqui5.png" alt="Samsung A05 64gb">
             <div class="product-info">
-                <p class="price">$ 175.00</p>
+                <p class="price">$ 230,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui6.png" alt="Producto 6">
+            <img src="tu-imagen-aqui6.png" alt="Samsung a15 128/4 gb ram">
             <div class="product-info">
-                <p class="price">$ 220.00</p>
+                <p class="price">$ 265,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui7.png" alt="Producto 7">
+            <img src="tu-imagen-aqui7.png" alt="Samsung a15 256/8gb ram">
             <div class="product-info">
-                <p class="price">$ 199.00</p>
+                <p class="price">$ 325,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui8.png" alt="Producto 8">
+            <img src="tu-imagen-aqui8.png" alt="Samsung A25 128/6GB RAM">
             <div class="product-info">
-                <p class="price">$ 250.00</p>
+                <p class="price">$ 395,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui9.png" alt="Producto 9">
+            <img src="tu-imagen-aqui9.png" alt="Redmi 13C 4/256gb">
             <div class="product-info">
-                <p class="price">$ 300.00</p>
+                <p class="price">$ 255,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui10.png" alt="Producto 10">
+            <img src="tu-imagen-aqui10.png" alt="Hot 40pro 16-256 gb">
             <div class="product-info">
-                <p class="price">$ 275.00</p>
+                <p class="price">$ 335,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui11.png" alt="Producto 11">
+            <img src="tu-imagen-aqui11.png" alt="Redmi note 13 8-256gb">
             <div class="product-info">
-                <p class="price">$ 320.00</p>
+                <p class="price">$ 335,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui12.png" alt="Producto 12">
+            <img src="tu-imagen-aqui12.png" alt="Redmi a3 64gb">
             <div class="product-info">
-                <p class="price">$ 290.00</p>
+                <p class="price">$ 210,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui13.png" alt="Producto 13">
+            <img src="tu-imagen-aqui13.png" alt="Redmi a3x 128gb">
             <div class="product-info">
-                <p class="price">$ 350.00</p>
+                <p class="price">$ 220,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui14.png" alt="Producto 14">
+            <img src="tu-imagen-aqui14.png" alt="Moto g14 128gb">
             <div class="product-info">
-                <p class="price">$ 310.00</p>
+                <p class="price">$ 240,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui15.png" alt="Producto 15">
+            <img src="tu-imagen-aqui15.png" alt="Moto g72 6-128gb">
             <div class="product-info">
-                <p class="price">$ 400.00</p>
+                <p class="price">$ 275,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui16.png" alt="Producto 16">
+            <img src="tu-imagen-aqui16.png" alt="Moto e14 64gb">
             <div class="product-info">
-                <p class="price">$ 380.00</p>
+                <p class="price">$ 210,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui17.png" alt="Producto 17">
+            <img src="tu-imagen-aqui17.png" alt="Moto g04 4-64gb">
             <div class="product-info">
-                <p class="price">$ 420.00</p>
+                <p class="price">$ 225,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui18.png" alt="Producto 18">
+            <img src="tu-imagen-aqui18.png" alt="Note 13 pro 8/256">
             <div class="product-info">
-                <p class="price">$ 450.00</p>
+                <p class="price">$ 385,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui19.png" alt="Producto 19">
+            <img src="tu-imagen-aqui19.png" alt="S23fe  5g 8-256">
             <div class="product-info">
-                <p class="price">$ 499.00</p>
+                <p class="price">$ 725,000.00</p>
             </div>
         </div>
         <div class="product">
-            <img src="tu-imagen-aqui20.png" alt="Producto 20">
+            <img src="tu-imagen-aqui20.png" alt="Moto g24 128/4">
             <div class="product-info">
-                <p class="price">$ 520.00</p>
+                <p class="price">$ 250,000.00</p>
             </div>
         </div>
     </div>
