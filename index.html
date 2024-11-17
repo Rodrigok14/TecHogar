@@ -154,10 +154,10 @@
 
         @keyframes scrollText {
             from {
-                transform: translateX(-100%);
+                transform: translateX(100%);
             }
             to {
-                transform: translateX(100%);
+                transform: translateX(-100%);
             }
         }
 
@@ -373,18 +373,6 @@
             width: 30px;
             height: 30px;
         }
-
-        /* Diseño responsivo */
-        @media (max-width: 900px) {
-            .product {
-                width: calc(50% - 40px); /* 2 productos por fila */
-            }
-        }
-
-        @media (max-width: 600px) {
-            .product {
-                width: calc(100% - 20px); /* 1 producto por fila */
-            }
 
             .menu-button {
                 padding: 6px 10px;
