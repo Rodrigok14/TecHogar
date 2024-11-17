@@ -57,24 +57,25 @@
             }
         }
 
-        /* Header con logo centrado y fijo */
+  /* Header con logo centrado y fijo */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100px; /* Ajusta la altura según el tamaño del logo */
+    height: 120px; /* Aumentamos la altura para acomodar el logo más grande */
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     z-index: 1000;
-    display: flex; /* Añadido para centrar el logo */
+    display: flex; /* Para centrar el logo */
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
 }
 
 .header img {
-    max-height: 150px; /* Aumenta este valor para hacer el logo más grande */
-    margin-top: 0; /* Puedes ajustar o eliminar este margen */
+    max-height: 100px; /* Aumentamos este valor para hacer el logo más grande */
+    width: auto;
+    height: auto;
 }
 
         /* Botón de menú dentro del header */
@@ -135,24 +136,25 @@
         }
 
         /* Barra informativa fija */
-        .info-bar {
-            position: fixed;
-            top: 60px; /* Debajo del header */
-            left: 0;
-            width: 100%;
-            background-color: #007bff;
-            overflow: hidden;
-            padding: 5px 10px;
-            z-index: 999;
-        }
+.info-bar {
+    position: fixed;
+    top: 120px; /* Ajustamos para que esté justo debajo del header */
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    overflow: hidden;
+    padding: 5px 10px;
+    z-index: 999;
+}
 
-        .info-bar p {
-            color: #fff;
-            font-size: 0.9rem;
-            margin: 0;
-            white-space: nowrap;
-            animation: scrollText 15s linear infinite;
-        }
+        /* Ajuste de la velocidad de animación del texto en la info-bar */
+.info-bar p {
+    color: #fff;
+    font-size: 0.9rem;
+    margin: 0;
+    white-space: nowrap;
+    animation: scrollText 30s linear infinite; /* Aumentamos la duración a 30s */
+}
 
         @keyframes scrollText {
             from {
@@ -164,9 +166,9 @@
         }
 
         /* Ajustar el contenido para evitar superposición */
-        .content {
-            margin-top: 90px; /* Altura del header + info-bar */
-        }
+.content {
+    margin-top: 150px; /* Altura del header (120px) + info-bar (~30px) */
+}
 
          /* Galería */
         .gallery {
@@ -198,21 +200,22 @@
             }
         }
 
-        @media (max-width: 600px) {
+       /* Media queries para dispositivos móviles */
+@media (max-width: 600px) {
     .header {
-        height: 80px; /* Altura ajustada para móviles */
+        height: 100px; /* Ajustamos la altura del header para móviles */
     }
 
     .header img {
-        max-height: 150px; /* Tamaño del logo en móviles */
+        max-height: 80px; /* Aumentamos el tamaño del logo en móviles */
     }
 
     .info-bar {
-        top: 30px; /* Ajustar posición de la info-bar */
+        top: 100px; /* Pegamos la info-bar al header en móviles */
     }
 
     .content {
-        margin-top: 110px; /* Ajustar margen superior del contenido */
+        margin-top: 130px; /* Ajustamos el margen superior del contenido */
     }
 }
 
