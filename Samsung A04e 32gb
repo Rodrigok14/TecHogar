@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung A04e 32gb - TecHogar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css"> <!-- Ruta relativa al archivo CSS -->
+</head>
+
+<body>
+    <!-- Animación inicial (opcional) -->
+    <div class="intro">
+        <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo" class="intro-logo">
+    </div>
+
+    <!-- Header con logo y menú -->
+    <div class="header">
+        <button class="menu-button" onclick="toggleMenu()">
+            <img src="https://i.imgur.com/u66LcMx.png" alt="Menu Icon">
+            Menú
+        </button>
+        <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo">
+        <!-- Menú desplegable -->
+        <div class="menu-dropdown" id="menu-dropdown">
+            <a href="../index.html" onclick="filterProducts('all')">Inicio</a>
+            <a href="#" onclick="filterProducts('celulares')">Celulares</a>
+            <a href="#" onclick="filterProducts('muebles')">Muebles</a>
+            <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
+        </div>
+    </div>
+
+    <!-- Barra informativa -->
+    <div class="info-bar">
+        <p id="info-text">
+            Aceptamos tarjetas: Visa, Mastercard, American Express, Naranja, Tarjeta Shopping, Nativa, Cencosud, Cabal.
+            Trabajamos con Mercado Pago. Ofrecemos envíos sin cargo dentro de San Miguel de Tucumán. Para precios
+            mayoristas, comunícate por chat.
+        </p>
+    </div>
+
+    <!-- Contenido del Producto -->
+    <div class="content" style="display: block;">
+        <div class="product-detail">
+            <h1>Samsung A04e 32gb</h1>
+            <img src="https://imgur.com/k9HXD0s.png" alt="Samsung A04e 32gb">
+            <p class="price">Precio contado: $215,000</p>
+            <p class="description">
+                <!-- Descripción detallada del producto -->
+                El Samsung A04e 32gb es un dispositivo robusto y confiable, ideal para usuarios que buscan funcionalidad y estilo.
+            </p>
+            <a class="financing-link" onclick="showFinancing('Samsung A04e 32gb', 215000)">Ver financiamiento</a>
+        </div>
+    </div>
+
+    <!-- Modal de Financiamiento (reutilizar) -->
+    <div class="overlay" onclick="closeFinancing()"></div>
+    <div class="financing" id="financing">
+        <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
+        <h3 id="product-name"></h3>
+        <p class="instruction">Selecciona una opción de financiamiento:</p>
+
+        <!-- Sección de Entrada Inicial para Semanales -->
+        <div class="financing-section">
+            <h4>Entrada Inicial <span class="entry-emoji">✅</span></h4>
+            <p class="entry-info" id="entry-info-weekly">Calculando...</p>
+        </div>
+
+        <!-- Opciones Semanales -->
+        <div class="financing-section">
+            <h4>Semanales</h4>
+            <div id="weekly-financing-options"></div>
+            <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
+        </div>
+
+        <!-- Separador -->
+        <div class="separator"></div>
+
+        <!-- Sección de Entrada Inicial para Mensuales -->
+        <div class="financing-section">
+            <h4>Entrada Inicial <span class="entry-emoji">✅</span></h4>
+            <p class="entry-info" id="entry-info-monthly">Calculando...</p>
+        </div>
+
+        <!-- Opciones Mensuales -->
+        <div class="financing-section">
+            <h4>Mensuales</h4>
+            <div id="monthly-financing-options"></div>
+            <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Footer (reutilizar) -->
+    <footer class="footer">
+        <div class="contact-info">
+            <p>Contacto: techogar05@gmail.com | Tel: +54 9 3813 19-8039</p>
+        </div>
+        <div class="follow-us">
+            <p>Seguinos</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/TecHogar05" target="_blank" aria-label="Facebook">
+                    <img src="https://i.imgur.com/EKVcRMs.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/techogar.tuc/" target="_blank" aria-label="Instagram">
+                    <img src="https://i.imgur.com/LChw2HU.png" alt="Instagram">
+                </a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 TecHogar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript (reutilizar) -->
+    <script src="../script.js"></script> <!-- Ruta relativa al archivo JS -->
+</body>
+
+</html>
