@@ -152,7 +152,8 @@
     margin: 0;
     white-space: nowrap;
     display: inline-block;
-    animation: scrollText var(--animation-duration) linear infinite;
+    animation: scrollText var(--animation-duration,30s) linear infinite;
+    animation-delay: 0s; /* Aseguramos que no hay retraso */
 }
 
     @keyframes scrollText {
@@ -235,6 +236,7 @@
         }
 
         .info-bar p {
+            animation-delay: 0s; /* Asegúrate de que no hay retraso */
             font-size: 1.2rem; /* Ajustamos el tamaño de fuente en móviles */
             animation: scrollText 20s linear infinite; /* Mantener duración */
         }
@@ -431,6 +433,25 @@
         width: 30px;
         height: 30px;
     }
+        /* Estilos para la sección de entrada inicial en el modal de financiamiento */
+.financing-section h4 {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.entry-emoji {
+    margin-left: 10px;
+    color: #28a745; /* Verde */
+    font-size: 1.5rem;
+}
+
+.entry-info {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 15px;
+}
 </style>
 
 </head>
@@ -677,29 +698,34 @@
         </div>
 
         <!-- Overlay y Modal de Financiamiento -->
-        <div class="overlay" onclick="closeFinancing()"></div>
-        <div class="financing" id="financing">
-            <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
-            <h3 id="product-name"></h3>
-            <p class="instruction">Selecciona una opción de financiamiento:</p>
+<div class="overlay" onclick="closeFinancing()"></div>
+<div class="financing" id="financing">
+    <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
+    <h3 id="product-name"></h3>
+    <p class="instruction">Selecciona una opción de financiamiento:</p>
 
-            <!-- Opciones Semanales -->
-            <div class="financing-section">
-                <h4>Semanales</h4>
-                <div id="weekly-financing-options"></div>
-                <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
-            </div>
-
-            <div class="separator"></div>
-
-            <!-- Opciones Mensuales -->
-            <div class="financing-section">
-                <h4>Mensuales</h4>
-                <div id="monthly-financing-options"></div>
-                <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
-            </div>
-        </div>
+    <!-- Sección de Entrada Inicial -->
+    <div class="financing-section">
+        <h4>Entrada Inicial <span class="entry-emoji">✅</span></h4>
+        <p class="entry-info">30% del precio total</p>
     </div>
+
+    <!-- Opciones Semanales -->
+    <div class="financing-section">
+        <h4>Semanales</h4>
+        <div id="weekly-financing-options"></div>
+        <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Opciones Mensuales -->
+    <div class="financing-section">
+        <h4>Mensuales</h4>
+        <div id="monthly-financing-options"></div>
+        <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
+    </div>
+</div>
 
     <!-- Footer -->
     <div class="footer">
