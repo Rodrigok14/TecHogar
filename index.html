@@ -13,438 +13,426 @@
         rel="stylesheet">
     <!-- Estilos -->
     <style>
-        /* Estilos generales */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5; /* Fondo gris claro */
-            color: #000; /* Texto en negro */
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Ocultar scroll horizontal */
-        }
+    /* Estilos generales */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f5f5f5; /* Fondo gris claro */
+        color: #000; /* Texto en negro */
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Ocultar scroll horizontal */
+    }
 
-        /* Animación inicial */
-        .intro {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000; /* Fondo negro */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
+    /* Animación inicial */
+    .intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000; /* Fondo negro */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    }
 
-        .intro-logo {
-            max-width: 100px;
+    .intro-logo {
+        max-width: 100px;
+        opacity: 0;
+        animation: logoIntro 2s forwards;
+        filter: invert(1); /* Aplicamos el filtro para invertir los colores */
+    }
+
+    @keyframes logoIntro {
+        0% {
             opacity: 0;
-            animation: logoIntro 2s forwards;
-            filter: invert(1); /* Aplicamos el filtro para invertir los colores */
+            transform: scale(0.5);
+            filter: invert(1);
         }
-
-        @keyframes logoIntro {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-                filter: invert(1);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(3); /* Logo más grande */
-                filter: invert(1);
-            }
+        100% {
+            opacity: 1;
+            transform: scale(3); /* Logo más grande */
+            filter: invert(1);
         }
+    }
 
-  /* Header con logo centrado y fijo */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 120px; /* Aumentamos la altura para acomodar el logo más grande */
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    z-index: 1000;
-    display: flex; /* Para centrar el logo */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-}
-
-.header img {
-    max-height: 100px; /* Aumentamos este valor para hacer el logo más grande */
-    width: auto;
-    height: auto;
-}
-
-        /* Botón de menú dentro del header */
-        .menu-button {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            background-color: #007bff;
-            color: #fff;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            z-index: 1001;
-        }
-
-        .menu-button img {
-            width: 18px;
-            height: 18px;
-            margin-right: 8px;
-        }
-
-        /* Menú desplegable */
-        .menu-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%; /* Debajo del botón del menú */
-            left: 0;
-            background-color: #007bff; /* Fondo azul */
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            z-index: 1001;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            width: 150px;
-        }
-
-        .menu-dropdown a {
-            display: block;
-            padding: 10px 15px;
-            color: #fff; /* Texto blanco */
-            text-decoration: none;
-            font-size: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .menu-dropdown a:last-child {
-            border-bottom: none;
-        }
-
-        .menu-dropdown a:hover {
-            background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
-        }
-
-        /* Barra informativa fija */
-.info-bar {
-    position: fixed;
-    top: 120px; /* Ajustamos para que esté justo debajo del header */
-    left: 0;
-    width: 100%;
-    background-color: #007bff; /* Fondo azul */
-    overflow: hidden; /* Ocultamos cualquier contenido que se desborde */
-    padding: 5px 20px; /* Espacio interno */
-    z-index: 999; /* Capas sobre otros elementos */
-}
-
-        /* Ajuste de la velocidad de animación del texto en la info-bar */
-.info-bar p {
-    color: #fff;
-    font-size: 0.9rem;
-    margin: 0;
-    white-space: nowrap;
-    animation: scrollText 30s linear infinite; /* Aumentamos la duración a 30s */
-}
-
-        @keyframes scrollText {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
-
-        /* Ajustar el contenido para evitar superposición */
-.content {
-    margin-top: 150px; /* Altura del header (120px) + info-bar (~30px) */
-}
-
-         /* Galería */
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 20px;
-        }
-
-        /* Por defecto, 2 productos por fila (dispositivos móviles) */
-        .product {
-            background: #fff;
-            flex: 0 1 calc(50% - 20px); /* 2 productos por fila */
-            margin: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            box-sizing: border-box;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #000;
-            border: 1px solid #ddd;
-        }
-
-        /* Estilos para escritorio - 5 productos por fila */
-        @media (min-width: 1200px) {
-            .product {
-                flex: 0 1 calc(20% - 20px); /* 5 productos por fila */
-                margin: 10px;
-            }
-        }
-
-       /* Media queries para dispositivos móviles */
-@media (max-width: 600px) {
+    /* Header con logo centrado y fijo */
     .header {
-        height: 100px; /* Ajustamos la altura del header para móviles */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 170px; /* Aumentamos la altura para acomodar el logo más grande */
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        z-index: 1000;
+        display: flex; /* Para centrar el logo */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
     }
 
     .header img {
-        max-height: 120px; /* Aumentamos el tamaño del logo en móviles */
+        max-height: 150px; /* Aumentamos este valor para hacer el logo más grande */
+        width: auto;
+        height: auto;
     }
 
+    /* Botón de menú dentro del header */
+    .menu-button {
+        position: absolute;
+        top: 20px; /* Ajustamos la posición para que no se superponga con el logo */
+        left: 20px;
+        background-color: #007bff;
+        color: #fff;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        z-index: 1001;
+    }
+
+    .menu-button img {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+    }
+
+    /* Menú desplegable */
+    .menu-dropdown {
+        display: none;
+        position: absolute;
+        top: 60px; /* Debajo del botón del menú */
+        left: 20px;
+        background-color: #007bff; /* Fondo azul */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        z-index: 1001;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        width: 150px;
+    }
+
+    .menu-dropdown a {
+        display: block;
+        padding: 10px 15px;
+        color: #fff; /* Texto blanco */
+        text-decoration: none;
+        font-size: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-dropdown a:last-child {
+        border-bottom: none;
+    }
+
+    .menu-dropdown a:hover {
+        background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+    }
+
+    /* Barra informativa fija */
     .info-bar {
-        top: 100px; /* Pegamos la info-bar al header en móviles */
+        position: fixed;
+        top: 170px; /* Ajustamos para que esté justo debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: #007bff; /* Fondo azul */
+        overflow: hidden; /* Ocultamos cualquier contenido que se desborde */
+        padding: 10px 20px; /* Aumentamos el padding */
+        z-index: 999; /* Capas sobre otros elementos */
     }
 
+    /* Ajuste de la velocidad de animación del texto en la info-bar */
+    .info-bar p {
+        color: #fff;
+        font-size: 1.5rem; /* Aumentamos el tamaño de fuente */
+        margin: 0;
+        white-space: nowrap;
+        animation: scrollText 45s linear infinite; /* Aumentamos la duración a 45s */
+    }
+
+    @keyframes scrollText {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    /* Ajustar el contenido para evitar superposición */
     .content {
-        margin-top: 130px; /* Ajustamos el margen superior del contenido */
+        margin-top: 210px; /* Altura del header (170px) + info-bar (~40px) */
     }
-}
 
-        .product img {
-            width: 100%;
+    /* Galería */
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    /* Por defecto, 2 productos por fila (dispositivos móviles) */
+    .product {
+        background: #fff;
+        flex: 0 1 calc(50% - 20px); /* 2 productos por fila */
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        color: #000;
+        border: 1px solid #ddd;
+    }
+
+    /* Estilos para escritorio - 5 productos por fila */
+    @media (min-width: 1200px) {
+        .product {
+            flex: 0 1 calc(20% - 20px); /* 5 productos por fila */
+            margin: 10px;
+        }
+    }
+
+    /* Media queries para dispositivos móviles */
+    @media (max-width: 600px) {
+        .header {
+            height: 130px; /* Ajustamos la altura del header para móviles */
+        }
+
+        .header img {
+            max-height: 110px; /* Aumentamos el tamaño del logo en móviles */
+            width: auto;
             height: auto;
-            border-radius: 5px;
         }
 
-        .product-info {
-            margin-top: 10px;
+        .menu-button {
+            top: 10px;
+            left: 10px;
+            padding: 6px 10px;
+            font-size: 0.8rem;
         }
 
-        .product-info .name {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .product-info .price {
-            font-size: 0.9rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .product-info .financing-link {
-            color: #007bff;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .product-info .financing-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Modal de financiamiento */
-        .financing {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 5px;
-            box-sizing: border-box;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            max-width: 400px;
-            width: 90%;
-            color: #000;
-        }
-
-        .financing h3 {
-            margin-top: 0;
-        }
-
-        .financing .financing-options {
-            margin-top: 15px;
-        }
-
-        .financing .separator {
-            border-top: 1px solid #ccc;
-            margin: 15px 0;
-        }
-
-        .financing-section {
-            margin-bottom: 15px;
-        }
-
-        .financing-section h4 {
-            margin-bottom: 10px;
-        }
-
-        .financing-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
-        .financing-option input {
-            margin-right: 8px;
-            cursor: pointer;
-        }
-
-        /* Botón para enviar por WhatsApp */
-        .whatsapp-button {
-            display: none;
-            background-color: #25D366;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        .whatsapp-button.show {
-            display: inline-block;
-        }
-
-        .financing .close-btn {
-            background: #ccc;
-            color: #000;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            float: right;
-        }
-
-        .financing .close-btn:hover {
-            background: #bbb;
-        }
-
-        /* Overlay */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .overlay.active,
-        .financing.active {
-            display: block;
-        }
-
-        /* Botón de chat */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px; /* Posicionado a la derecha */
-            text-align: center;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .chat-button span {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: #000;
+        .menu-button img {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
         }
 
         .chat-button img {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
         }
 
-        /* Footer */
-        .footer {
-            background-color: #007bff;
-            color: #fff; /* Aseguramos que el texto sea blanco */
-            padding: 20px;
-            text-align: center;
+        .info-bar {
+            top: 130px; /* Pegamos la info-bar al header en móviles */
+            padding: 8px 12px; /* Ajustar padding si es necesario */
         }
 
-        .footer a {
-            color: #fff; /* Enlaces en blanco */
-            text-decoration: none;
+        .info-bar p {
+            font-size: 1.2rem; /* Ajustamos el tamaño de fuente en móviles */
+            animation: scrollText 45s linear infinite; /* Mantener duración */
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .content {
+            margin-top: 170px; /* Ajustamos el margen superior del contenido */
         }
+    }
 
-        .footer .contact-info {
-            margin-bottom: 10px;
-        }
+    /* Estilos generales para productos e imágenes */
+    .product img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
 
-        .footer .social-icons a {
-            margin: 0 10px;
-        }
+    .product-info {
+        margin-top: 10px;
+    }
 
-        .footer .social-icons img {
-            width: 30px;
-            height: 30px;
-        }
+    .product-info .name {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-            .menu-button {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
+    .product-info .price {
+        font-size: 0.9rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
 
-            .menu-button img {
-                width: 16px;
-                height: 16px;
-                margin-right: 6px;
-            }
+    .product-info .financing-link {
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
 
-            .chat-button img {
-                width: 40px;
-                height: 40px;
-            }
+    .product-info .financing-link:hover {
+        text-decoration: underline;
+    }
 
-            .header img {
-                max-height: 40px;
-                margin-top: 10px;
-            }
+    /* Modal de financiamiento */
+    .financing {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        max-width: 400px;
+        width: 90%;
+        color: #000;
+    }
 
-            /* Barra informativa fija */
-.info-bar {
-    position: fixed;
-    top: 100px; /* Debajo del header ajustado */
-    left: 0;
-    width: 100%;
-    background-color: #007bff;
-    overflow: hidden;
-    padding: 5px 10px;
-    z-index: 999;
-    /* Otros estilos */
-}
+    .financing h3 {
+        margin-top: 0;
+    }
 
-            .content {
-                margin-top: 130px;
-            }
-        }
-    </style>
+    .financing .financing-options {
+        margin-top: 15px;
+    }
+
+    .financing .separator {
+        border-top: 1px solid #ccc;
+        margin: 15px 0;
+    }
+
+    .financing-section {
+        margin-bottom: 15px;
+    }
+
+    .financing-section h4 {
+        margin-bottom: 10px;
+    }
+
+    .financing-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+
+    .financing-option input {
+        margin-right: 8px;
+        cursor: pointer;
+    }
+
+    /* Botón para enviar por WhatsApp */
+    .whatsapp-button {
+        display: none;
+        background-color: #25D366;
+        color: #fff;
+        border: none;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 0.9rem;
+    }
+
+    .whatsapp-button.show {
+        display: inline-block;
+    }
+
+    .financing .close-btn {
+        background: #ccc;
+        color: #000;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        float: right;
+    }
+
+    .financing .close-btn:hover {
+        background: #bbb;
+    }
+
+    /* Overlay */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .overlay.active,
+    .financing.active {
+        display: block;
+    }
+
+    /* Botón de chat */
+    .chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px; /* Posicionado a la derecha */
+        text-align: center;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .chat-button span {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #000;
+    }
+
+    .chat-button img {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Footer */
+    .footer {
+        background-color: #007bff;
+        color: #fff; /* Aseguramos que el texto sea blanco */
+        padding: 20px;
+        text-align: center;
+    }
+
+    .footer a {
+        color: #fff; /* Enlaces en blanco */
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    .footer .contact-info {
+        margin-bottom: 10px;
+    }
+
+    .footer .social-icons a {
+        margin: 0 10px;
+    }
+
+    .footer .social-icons img {
+        width: 30px;
+        height: 30px;
+    }
+</style>
+
 </head>
 
 <body>
