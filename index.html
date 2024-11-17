@@ -63,7 +63,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 5px 0; /* Reducido el padding */
+            height: 60px; /* Altura fija del header */
             background-color: #fff;
             text-align: center;
             border-bottom: 1px solid #ddd;
@@ -71,74 +71,40 @@
         }
 
         .header img {
-            max-width: 80px; /* Reducido el tamaño del logo */
-            height: auto;
+            max-height: 50px;
+            margin-top: 5px;
         }
 
-        /* Barra informativa fija */
-        .info-bar {
-            position: fixed;
-            top: 50px; /* Altura del header */
-            left: 0;
-            width: 100%;
-            background-color: #007bff;
-            overflow: hidden;
-            padding: 5px 10px;
-            z-index: 999;
-        }
-
-        .info-bar p {
-            color: #fff;
-            font-size: 0.9rem;
-            margin: 0;
-            white-space: nowrap;
-            transform: translateX(100%);
-            animation: scrollText 15s linear infinite;
-        }
-
-        @keyframes scrollText {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
-
-        /* Ajustar el contenido para evitar superposición */
-        .content {
-            margin-top: 80px; /* Altura del header + info-bar */
-        }
-
-        /* Botón de menú flotante */
+        /* Botón de menú dentro del header */
         .menu-button {
-            position: fixed;
-            top: 70px; /* Ajustado para estar debajo de la info-bar */
+            position: absolute;
+            top: 50%;
             left: 20px;
+            transform: translateY(-50%);
             background-color: #007bff;
             color: #fff;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            z-index: 1001;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            font-size: 1rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
+            z-index: 1001;
         }
 
         .menu-button img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
         }
 
         /* Menú desplegable */
         .menu-dropdown {
             display: none;
             position: absolute;
-            top: 60px;
+            top: 100%; /* Debajo del botón del menú */
             left: 0;
             background-color: #007bff; /* Fondo azul */
             border: 1px solid #ddd;
@@ -146,6 +112,7 @@
             z-index: 1001;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
             overflow: hidden;
+            width: 150px;
         }
 
         .menu-dropdown a {
@@ -163,6 +130,40 @@
 
         .menu-dropdown a:hover {
             background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+        }
+
+        /* Barra informativa fija */
+        .info-bar {
+            position: fixed;
+            top: 60px; /* Debajo del header */
+            left: 0;
+            width: 100%;
+            background-color: #007bff;
+            overflow: hidden;
+            padding: 5px 10px;
+            z-index: 999;
+        }
+
+        .info-bar p {
+            color: #fff;
+            font-size: 0.9rem;
+            margin: 0;
+            white-space: nowrap;
+            animation: scrollText 15s linear infinite;
+        }
+
+        @keyframes scrollText {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Ajustar el contenido para evitar superposición */
+        .content {
+            margin-top: 90px; /* Altura del header + info-bar */
         }
 
         /* Galería */
@@ -386,15 +387,14 @@
             }
 
             .menu-button {
-                top: 65px; /* Ajustado para pantallas pequeñas */
-                left: 15px;
-                padding: 8px 12px;
-                font-size: 0.9rem;
+                padding: 6px 10px;
+                font-size: 0.8rem;
             }
 
             .menu-button img {
-                width: 18px;
-                height: 18px;
+                width: 16px;
+                height: 16px;
+                margin-right: 6px;
             }
 
             .chat-button img {
@@ -403,15 +403,16 @@
             }
 
             .header img {
-                max-width: 70px;
+                max-height: 40px;
+                margin-top: 10px;
             }
 
             .info-bar {
-                top: 45px; /* Ajuste para pantallas pequeñas */
+                top: 60px; /* Ajuste para pantallas pequeñas */
             }
 
             .content {
-                margin-top: 80px;
+                margin-top: 90px;
             }
         }
     </style>
@@ -423,10 +424,22 @@
         <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo" class="intro-logo">
     </div>
 
-    <!-- Header con logo centrado -->
+    <!-- Header con logo centrado y botón de menú -->
     <div class="header">
+        <button class="menu-button" onclick="toggleMenu()">
+            <img src="https://i.imgur.com/u66LcMx.png" alt="Menu Icon">
+            Menú
+        </button>
         <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo">
+        <!-- Menú desplegable -->
+        <div class="menu-dropdown" id="menu-dropdown">
+            <a href="#" onclick="filterProducts('all')">Todos</a>
+            <a href="#" onclick="filterProducts('celulares')">Celulares</a>
+            <a href="#" onclick="filterProducts('muebles')">Muebles</a>
+            <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
+        </div>
     </div>
+
     <!-- Barra informativa -->
     <div class="info-bar">
         <p>
@@ -434,20 +447,6 @@
             Trabajamos con Mercado Pago. Ofrecemos envíos sin cargo dentro de San Miguel de Tucumán. Para precios
             mayoristas, comunícate por chat.
         </p>
-    </div>
-
-    <!-- Botón de menú flotante -->
-    <button class="menu-button" onclick="toggleMenu()">
-        <img src="https://i.imgur.com/u66LcMx.png" alt="Menu Icon">
-        Menú
-    </button>
-
-    <!-- Menú desplegable -->
-    <div class="menu-dropdown" id="menu-dropdown">
-        <a href="#" onclick="filterProducts('all')">Todos</a>
-        <a href="#" onclick="filterProducts('celulares')">Celulares</a>
-        <a href="#" onclick="filterProducts('muebles')">Muebles</a>
-        <a href="#" onclick="filterProducts('electrodomesticos')">Electrodomésticos</a>
     </div>
 
     <!-- Contenido principal -->
@@ -676,7 +675,7 @@
 
             <div class="separator"></div>
 
-             <!-- Opciones Mensuales -->
+            <!-- Opciones Mensuales -->
             <div class="financing-section">
                 <h4>Mensuales</h4>
                 <div id="monthly-financing-options"></div>
