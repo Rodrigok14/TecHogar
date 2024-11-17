@@ -136,24 +136,24 @@
 
     /* Barra informativa fija */
     .info-bar {
-        position: fixed;
-        top: 170px; /* Ajustamos para que esté justo debajo del header */
-        left: 0;
-        width: 100%;
-        background-color: #007bff; /* Fondo azul */
-        overflow: hidden; /* Ocultamos cualquier contenido que se desborde */
-        padding: 10px 20px; /* Aumentamos el padding */
-        z-index: 999; /* Capas sobre otros elementos */
-    }
+    position: fixed;
+    top: 170px;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    overflow: hidden;
+    padding: 10px 20px;
+    z-index: 999;
+}
 
-    /* Ajuste de la velocidad de animación del texto en la info-bar */
-    .info-bar p {
-        color: #fff;
-        font-size: 1.5rem; /* Aumentamos el tamaño de fuente */
-        margin: 0;
-        white-space: nowrap;
-        animation: scrollText 45s linear infinite; /* Aumentamos la duración a 45s */
-    }
+.info-bar p {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+    white-space: nowrap;
+    display: inline-block;
+    animation: scrollText var(--animation-duration) linear infinite;
+}
 
     @keyframes scrollText {
         from {
@@ -236,7 +236,6 @@
 
         .info-bar p {
             font-size: 1.2rem; /* Ajustamos el tamaño de fuente en móviles */
-            animation: scrollText 15s linear infinite; /* Mantener duración */
         }
 
         .content {
@@ -459,12 +458,12 @@
 
     <!-- Barra informativa -->
     <div class="info-bar">
-        <p>
-            Aceptamos tarjetas: Visa, Mastercard, American Express, Naranja, Tarjeta Shopping, Nativa, Cencosud, Cabal.
-            Trabajamos con Mercado Pago. Ofrecemos envíos sin cargo dentro de San Miguel de Tucumán. Para precios
-            mayoristas, comunícate por chat.
-        </p>
-    </div>
+    <p id="info-text">
+        Aceptamos tarjetas: Visa, Mastercard, American Express, Naranja, Tarjeta Shopping, Nativa, Cencosud, Cabal.
+        Trabajamos con Mercado Pago. Ofrecemos envíos sin cargo dentro de San Miguel de Tucumán. Para precios
+        mayoristas, comunícate por chat.
+    </p>
+</div>
 
     <!-- Contenido principal -->
     <div class="content" style="display: none;">
@@ -719,180 +718,219 @@
     </div>
 
     <!-- JavaScript -->
-    <script>
-        // Ocultar la animación de introducción y mostrar el contenido
-        window.addEventListener('load', function () {
-            setTimeout(function () {
-                document.querySelector('.intro').style.display = 'none';
-                document.querySelector('.content').style.display = 'block';
-            }, 2000); // Tiempo total de la animación (2 segundos)
-        });
+    <!-- JavaScript -->
+<script>
+    // Ocultar la animación de introducción y mostrar el contenido
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.querySelector('.intro').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+        }, 2000); // Tiempo total de la animación (2 segundos)
 
-        // Función para togglear el menú
-        function toggleMenu() {
-            const menuDropdown = document.getElementById('menu-dropdown');
-            if (menuDropdown.style.display === 'block') {
-                menuDropdown.style.display = 'none';
-            } else {
-                menuDropdown.style.display = 'block';
-            }
+        adjustAnimationDuration(); // Ajustar la duración de la animación al cargar la página
+    });
+
+    // Función para togglear el menú
+    function toggleMenu() {
+        const menuDropdown = document.getElementById('menu-dropdown');
+        if (menuDropdown.style.display === 'block') {
+            menuDropdown.style.display = 'none';
+        } else {
+            menuDropdown.style.display = 'block';
         }
+    }
 
-        // Cerrar el menú al hacer clic fuera de él
-        document.addEventListener('click', function (event) {
-            const isClickInside = document.querySelector('.menu-button').contains(event.target) || document.getElementById('menu-dropdown').contains(event.target);
-            if (!isClickInside) {
-                document.getElementById('menu-dropdown').style.display = 'none';
-            }
-        });
-
-        // Filtrar productos por categoría
-        function filterProducts(category) {
-            const products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-            // Cerrar el menú después de seleccionar una categoría
+    // Cerrar el menú al hacer clic fuera de él
+    document.addEventListener('click', function (event) {
+        const isClickInside = document.querySelector('.menu-button').contains(event.target) || document.getElementById('menu-dropdown').contains(event.target);
+        if (!isClickInside) {
             document.getElementById('menu-dropdown').style.display = 'none';
         }
+    });
 
-        // Función para abrir el chat de WhatsApp
-        function openChat() {
-            const phoneNumber = '5493813198039'; // Número de WhatsApp
-            const url = `https://wa.me/${phoneNumber}`;
+    // Filtrar productos por categoría
+    function filterProducts(category) {
+        const products = document.querySelectorAll('.product');
+        products.forEach(product => {
+            if (category === 'all' || product.dataset.category === category) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+        // Cerrar el menú después de seleccionar una categoría
+        document.getElementById('menu-dropdown').style.display = 'none';
+    }
+
+    // Función para abrir el chat de WhatsApp
+    function openChat() {
+        const phoneNumber = '5493813198039'; // Número de WhatsApp
+        const url = `https://wa.me/${phoneNumber}`;
+        window.open(url, '_blank');
+    }
+
+    // Código para el modal de financiamiento
+    let selectedFinancingOptionWeekly = null;
+    let selectedFinancingOptionMonthly = null;
+    let selectedProductName = '';
+    let selectedProductPrice = 0;
+
+    function calculateInstallments(price, term, type) {
+        const initialPayment = price * 0.3; // 30% de entrada
+        const remainingBalance = price - initialPayment;
+        let interestRate;
+
+        if (type === 'week') {
+            interestRate = 13 * (term / 4);
+        } else {
+            interestRate = 13 * term;
+        }
+
+        const totalWithInterest = remainingBalance * (1 + interestRate / 100);
+        const installment = Math.ceil(totalWithInterest / term);
+        const formattedInstallment = installment.toLocaleString('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0
+        });
+
+        return formattedInstallment;
+    }
+
+    function showFinancing(productName, price) {
+        selectedProductName = productName;
+        selectedProductPrice = price;
+        selectedFinancingOptionWeekly = null;
+        selectedFinancingOptionMonthly = null;
+
+        const weeklyOptionsContainer = document.getElementById("weekly-financing-options");
+        const monthlyOptionsContainer = document.getElementById("monthly-financing-options");
+        weeklyOptionsContainer.innerHTML = "";
+        monthlyOptionsContainer.innerHTML = "";
+
+        const weeks = [4, 8, 12, 16, 20];
+        const months = [1, 2, 3, 4, 5];
+
+        // Opciones semanales
+        weeks.forEach(week => {
+            const installment = calculateInstallments(price, week, 'week');
+            const label = document.createElement('label');
+            label.classList.add('financing-option');
+
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'financing-weekly';
+            input.value = `${week} semanas de ${installment}`;
+            input.onclick = (event) => selectFinancingOption(event, input.value, 'weekly');
+
+            const span = document.createElement('span');
+            span.textContent = `${week} semanas de ${installment}`;
+
+            label.appendChild(input);
+            label.appendChild(span);
+            weeklyOptionsContainer.appendChild(label);
+        });
+
+        // Opciones mensuales
+        months.forEach(month => {
+            const installment = calculateInstallments(price, month, 'month');
+            const label = document.createElement('label');
+            label.classList.add('financing-option');
+
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'financing-monthly';
+            input.value = `${month} meses de ${installment}`;
+            input.onclick = (event) => selectFinancingOption(event, input.value, 'monthly');
+
+            const span = document.createElement('span');
+            span.textContent = `${month} meses de ${installment}`;
+
+            label.appendChild(input);
+            label.appendChild(span);
+            monthlyOptionsContainer.appendChild(label);
+        });
+
+        document.getElementById("product-name").textContent = `Financiamiento para: ${productName}`;
+        document.querySelector(".overlay").classList.add("active");
+        document.getElementById("financing").classList.add("active");
+
+        // Ocultar los botones de WhatsApp hasta que se seleccione una opción
+        document.getElementById("whatsapp-button-weekly").classList.remove('show');
+        document.getElementById("whatsapp-button-monthly").classList.remove('show');
+    }
+
+    function selectFinancingOption(event, optionText, type) {
+        if (type === 'weekly') {
+            selectedFinancingOptionWeekly = optionText;
+            document.getElementById("whatsapp-button-weekly").classList.add('show');
+        } else {
+            selectedFinancingOptionMonthly = optionText;
+            document.getElementById("whatsapp-button-monthly").classList.add('show');
+        }
+    }
+
+    function closeFinancing() {
+        document.querySelector(".overlay").classList.remove("active");
+        document.getElementById("financing").classList.remove("active");
+    }
+
+    // Enviar mensaje por WhatsApp - Semanal
+    document.getElementById("whatsapp-button-weekly").addEventListener('click', function () {
+        if (selectedFinancingOptionWeekly) {
+            const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionWeekly}.`;
+            const phoneNumber = '5493813198039';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
+    });
 
-        // Código para el modal de financiamiento
-        let selectedFinancingOptionWeekly = null;
-        let selectedFinancingOptionMonthly = null;
-        let selectedProductName = '';
-        let selectedProductPrice = 0;
+    // Enviar mensaje por WhatsApp - Mensual
+    document.getElementById("whatsapp-button-monthly").addEventListener('click', function () {
+        if (selectedFinancingOptionMonthly) {
+            const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionMonthly}.`;
+            const phoneNumber = '5493813198039';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    });
 
-        function calculateInstallments(price, term, type) {
-            const initialPayment = price * 0.3; // 30% de entrada
-            const remainingBalance = price - initialPayment;
-            let interestRate;
+    /* -----------------------------------------------
+       Script para ajustar dinámicamente la duración de la animación en la info-bar
+    ----------------------------------------------- */
+    function adjustAnimationDuration() {
+        const infoText = document.getElementById('info-text');
+        const infoBar = document.querySelector('.info-bar');
 
-            if (type === 'week') {
-                interestRate = 13 * (term / 4);
-            } else {
-                interestRate = 13 * term;
-            }
+        // Obtener el ancho del texto y del contenedor
+        const textWidth = infoText.scrollWidth;
+        const containerWidth = infoBar.offsetWidth;
 
-            const totalWithInterest = remainingBalance * (1 + interestRate / 100);
-            const installment = Math.ceil(totalWithInterest / term);
-            const formattedInstallment = installment.toLocaleString('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 0
-            });
+        // Definir una duración base (en segundos)
+        const baseDurationDesktop = 45; // Duración para escritorio
+        const baseDurationMobile = 25;  // Duración para móviles
 
-            return formattedInstallment;
+        // Obtener el ancho de la ventana para determinar si es móvil o escritorio
+        const windowWidth = window.innerWidth;
+
+        // Calcular la duración de la animación proporcionalmente
+        let animationDuration;
+        if (windowWidth > 600) { // Escritorio
+            animationDuration = (textWidth / containerWidth) * baseDurationDesktop;
+        } else { // Móvil
+            animationDuration = (textWidth / containerWidth) * baseDurationMobile;
         }
 
-        function showFinancing(productName, price) {
-            selectedProductName = productName;
-            selectedProductPrice = price;
-            selectedFinancingOptionWeekly = null;
-            selectedFinancingOptionMonthly = null;
+        // Establecer la duración en la variable CSS
+        infoText.style.setProperty('--animation-duration', `${animationDuration}s`);
+    }
 
-            const weeklyOptionsContainer = document.getElementById("weekly-financing-options");
-            const monthlyOptionsContainer = document.getElementById("monthly-financing-options");
-            weeklyOptionsContainer.innerHTML = "";
-            monthlyOptionsContainer.innerHTML = "";
+    // Ejecutar la función al cargar la página
+    window.addEventListener('load', adjustAnimationDuration);
 
-            const weeks = [4, 8, 12, 16, 20];
-            const months = [1, 2, 3, 4, 5];
-
-            // Opciones semanales
-            weeks.forEach(week => {
-                const installment = calculateInstallments(price, week, 'week');
-                const label = document.createElement('label');
-                label.classList.add('financing-option');
-
-                const input = document.createElement('input');
-                input.type = 'radio';
-                input.name = 'financing-weekly';
-                input.value = `${week} semanas de ${installment}`;
-                input.onclick = (event) => selectFinancingOption(event, input.value, 'weekly');
-
-                const span = document.createElement('span');
-                span.textContent = `${week} semanas de ${installment}`;
-
-                label.appendChild(input);
-                label.appendChild(span);
-                weeklyOptionsContainer.appendChild(label);
-            });
-
-            // Opciones mensuales
-            months.forEach(month => {
-                const installment = calculateInstallments(price, month, 'month');
-                const label = document.createElement('label');
-                label.classList.add('financing-option');
-
-                const input = document.createElement('input');
-                input.type = 'radio';
-                input.name = 'financing-monthly';
-                input.value = `${month} meses de ${installment}`;
-                input.onclick = (event) => selectFinancingOption(event, input.value, 'monthly');
-
-                const span = document.createElement('span');
-                span.textContent = `${month} meses de ${installment}`;
-
-                label.appendChild(input);
-                label.appendChild(span);
-                monthlyOptionsContainer.appendChild(label);
-            });
-
-            document.getElementById("product-name").textContent = `Financiamiento para: ${productName}`;
-            document.querySelector(".overlay").classList.add("active");
-            document.getElementById("financing").classList.add("active");
-
-            // Ocultar los botones de WhatsApp hasta que se seleccione una opción
-            document.getElementById("whatsapp-button-weekly").classList.remove('show');
-            document.getElementById("whatsapp-button-monthly").classList.remove('show');
-        }
-
-        function selectFinancingOption(event, optionText, type) {
-            if (type === 'weekly') {
-                selectedFinancingOptionWeekly = optionText;
-                document.getElementById("whatsapp-button-weekly").classList.add('show');
-            } else {
-                selectedFinancingOptionMonthly = optionText;
-                document.getElementById("whatsapp-button-monthly").classList.add('show');
-            }
-        }
-
-        function closeFinancing() {
-            document.querySelector(".overlay").classList.remove("active");
-            document.getElementById("financing").classList.remove("active");
-        }
-
-        // Enviar mensaje por WhatsApp - Semanal
-        document.getElementById("whatsapp-button-weekly").addEventListener('click', function () {
-            if (selectedFinancingOptionWeekly) {
-                const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionWeekly}.`;
-                const phoneNumber = '5493813198039';
-                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
-            }
-        });
-
-        // Enviar mensaje por WhatsApp - Mensual
-        document.getElementById("whatsapp-button-monthly").addEventListener('click', function () {
-            if (selectedFinancingOptionMonthly) {
-                const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionMonthly}.`;
-                const phoneNumber = '5493813198039';
-                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
-            }
-        });
-    </script>
+    // Ejecutar la función al redimensionar la ventana
+    window.addEventListener('resize', adjustAnimationDuration);
+</script>
 </body>
 
 </html>
