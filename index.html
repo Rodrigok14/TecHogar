@@ -40,7 +40,7 @@
     .intro-logo {
         max-width: 100px;
         opacity: 0;
-        animation: logoIntro 1.5s forwards;
+        animation: logoIntro 2s forwards;
         filter: invert(1); /* Aplicamos el filtro para invertir los colores */
     }
 
@@ -48,42 +48,51 @@
         0% {
             opacity: 0;
             transform: scale(0.5);
-            filter: invert(1); /* Mantener el filtro durante la animación */
+            filter: invert(1);
         }
         50% {
             opacity: 1;
-            transform: scale(2.5); /* Logo más grande */
+            transform: scale(3); /* Logo más grande */
+            filter: invert(1);
+        }
+        70% {
+            opacity: 1;
+            transform: scale(3);
+            filter: invert(1);
+        }
+        80% {
+            opacity: 0;
+            transform: scale(3);
             filter: invert(1);
         }
         100% {
-            opacity: 1;
-            transform: scale(1);
+            opacity: 0;
+            transform: scale(3);
             filter: invert(1);
         }
     }
 
-    /* Efecto de luz */
-    .intro-logo::after {
-        content: '';
+    /* Efecto de explosión */
+    .intro-explosion {
         position: absolute;
-        width: 150%;
-        height: 150%;
-        top: -25%;
-        left: -25%;
-        background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,255,1), transparent 70%);
         opacity: 0;
-        animation: lightEffect 1.5s forwards;
+        animation: explosionEffect 0.5s forwards 1.5s;
     }
 
-    @keyframes lightEffect {
+    @keyframes explosionEffect {
         0% {
+            width: 0;
+            height: 0;
             opacity: 0;
-        }
-        50% {
-            opacity: 1;
         }
         100% {
-            opacity: 0;
+            width: 500px;
+            height: 500px;
+            opacity: 1;
         }
     }
 
@@ -100,7 +109,6 @@
     .header img {
         max-width: 120px;
         height: auto;
-        transition: filter 0.5s;
     }
 
     /* Botón de menú flotante */
@@ -359,12 +367,14 @@
     }
 </style>
 
+
 </head>
 
 <body>
     <!-- Animación inicial -->
     <div class="intro">
         <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo" class="intro-logo">
+        <div class="intro-explosion"></div> <!-- Efecto de explosión -->
     </div>
 
     <!-- Header con logo centrado -->
@@ -625,13 +635,14 @@
 
     <!-- JavaScript -->
     <script>
-        // Ocultar la animación de introducción y mostrar el contenido
-        window.addEventListener('load', function () {
-            setTimeout(function () {
-                document.querySelector('.intro').style.display = 'none';
-                document.querySelector('.content').style.display = 'block';
-            }, 3000); // Tiempo de la animación (3 segundos)
-        });
+    // Ocultar la animación de introducción y mostrar el contenido
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.querySelector('.intro').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+        }, 2000); // Tiempo total de la animación (2 segundos)
+    });
+
 
         // Función para togglear el menú
         function toggleMenu() {
