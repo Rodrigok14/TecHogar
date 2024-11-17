@@ -14,343 +14,319 @@
     <!-- Estilos -->
     <style>
         /* Estilos generales */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5; /* Fondo gris claro */
-            color: #000; /* Texto en negro */
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Ocultar scroll horizontal */
-        }
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5; /* Fondo gris claro */
+    color: #000; /* Texto en negro */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Ocultar scroll horizontal */
+}
 
-        /* Animación inicial */
-        .intro {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000; /* Fondo negro */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            overflow: hidden; /* Ocultar desbordamiento */
-        }
+/* Animación inicial */
+.intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Fondo negro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
 
-        .intro-logo {
-            max-width: 100px;
-            opacity: 0;
-            animation: logoIntro 2s forwards;
-            filter: invert(1); /* Aplicamos el filtro para invertir los colores */
-        }
+.intro-logo {
+    max-width: 100px;
+    opacity: 0;
+    animation: logoIntro 2s forwards;
+    filter: invert(1); /* Aplicamos el filtro para invertir los colores */
+}
 
-        @keyframes logoIntro {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-                filter: invert(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(3); /* Logo más grande */
-                filter: invert(1);
-            }
-            70% {
-                opacity: 1;
-                transform: scale(3);
-                filter: invert(1);
-            }
-            80% {
-                opacity: 0;
-                transform: scale(3);
-                filter: invert(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(3);
-                filter: invert(1);
-            }
-        }
+@keyframes logoIntro {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+        filter: invert(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(3); /* Logo más grande */
+        filter: invert(1);
+    }
+}
 
-        /* Canvas para la explosión de partículas */
-        #explosionCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+/* Header con logo centrado */
+.header {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
 
-        /* Header con logo centrado */
-        .header {
-            position: relative;
-            width: 100%;
-            padding: 10px 0;
-            background-color: #fff;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
+.header img {
+    max-width: 120px;
+    height: auto;
+}
 
-        .header img {
-            max-width: 120px;
-            height: auto;
-        }
+/* Botón de menú flotante */
+.menu-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
 
-        /* Botón de menú flotante */
-        .menu-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-        }
+.menu-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
 
-        .menu-button img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
+/* Menú desplegable */
+.menu-dropdown {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    background-color: #007bff; /* Fondo azul */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
 
-        /* Menú desplegable */
-        .menu-dropdown {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 20px;
-            background-color: #007bff; /* Fondo azul */
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            z-index: 1000;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
+.menu-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff; /* Texto blanco */
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+}
 
-        .menu-dropdown a {
-            display: block;
-            padding: 10px 15px;
-            color: #fff; /* Texto blanco */
-            text-decoration: none;
-            font-size: 1rem;
-            border-bottom: 1px solid #eee;
-        }
+.menu-dropdown a:last-child {
+    border-bottom: none;
+}
 
-        .menu-dropdown a:last-child {
-            border-bottom: none;
-        }
+.menu-dropdown a:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+}
 
-        .menu-dropdown a:hover {
-            background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
-        }
+/* Galería */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
 
-        /* Galería */
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
+.product {
+    background: #fff;
+    width: 45%;
+    margin: 2%;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #000;
+    border: 1px solid #ddd;
+}
 
-        .product {
-            background: #fff;
-            width: 45%;
-            margin: 2%;
-            padding: 10px;
-            border-radius: 5px;
-            box-sizing: border-box;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #000;
-            border: 1px solid #ddd;
-        }
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
 
-        .product img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+.product-info {
+    margin-top: 10px;
+}
 
-        .product-info {
-            margin-top: 10px;
-        }
+.product-info .name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 
-        .product-info .name {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+.product-info .price {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 10px;
+}
 
-        .product-info .price {
-            font-size: 0.9rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
+.product-info .financing-link {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
 
-        .product-info .financing-link {
-            color: #007bff;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
+.product-info .financing-link:hover {
+    text-decoration: underline;
+}
 
-        .product-info .financing-link:hover {
-            text-decoration: underline;
-        }
+/* Modal de financiamiento */
+.financing {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 400px;
+    width: 90%;
+    color: #000;
+}
 
-        /* Modal de financiamiento */
-        .financing {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            max-width: 400px;
-            width: 90%;
-            color: #000;
-        }
+.financing h3 {
+    margin-top: 0;
+}
 
-        .financing h3 {
-            margin-top: 0;
-        }
+.financing .financing-options {
+    margin-top: 15px;
+}
 
-        .financing .financing-options {
-            margin-top: 15px;
-        }
+.financing .separator {
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
+}
 
-        .financing .separator {
-            border-top: 1px solid #ccc;
-            margin: 15px 0;
-        }
+.financing-section {
+    margin-bottom: 15px;
+}
 
-        .financing-section {
-            margin-bottom: 15px;
-        }
+.financing-section h4 {
+    margin-bottom: 10px;
+}
 
-        .financing-section h4 {
-            margin-bottom: 10px;
-        }
+.financing-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
 
-        .financing-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
+.financing-option input {
+    margin-right: 8px;
+    cursor: pointer;
+}
 
-        .financing-option input {
-            margin-right: 8px;
-            cursor: pointer;
-        }
+/* Botón para enviar por WhatsApp */
+.whatsapp-button {
+    display: none;
+    background-color: #25D366;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
 
-        /* Botón para enviar por WhatsApp */
-        .whatsapp-button {
-            display: none;
-            background-color: #25D366;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
+.whatsapp-button.show {
+    display: inline-block;
+}
 
-        .whatsapp-button.show {
-            display: inline-block;
-        }
+.financing .close-btn {
+    background: #ccc;
+    color: #000;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+}
 
-        .financing .close-btn {
-            background: #ccc;
-            color: #000;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            float: right;
-        }
+.financing .close-btn:hover {
+    background: #bbb;
+}
 
-        .financing .close-btn:hover {
-            background: #bbb;
-        }
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
 
-        /* Overlay */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
+.overlay.active,
+.financing.active {
+    display: block;
+}
 
-        .overlay.active,
-        .financing.active {
-            display: block;
-        }
+/* Botón de chat */
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Posicionado a la derecha */
+    text-align: center;
+    cursor: pointer;
+    z-index: 1000;
+}
 
-        /* Botón de chat */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px; /* Posicionado a la derecha */
-            text-align: center;
-            cursor: pointer;
-            z-index: 1000;
-        }
+.chat-button span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #000;
+}
 
-        .chat-button span {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: #000;
-        }
+.chat-button img {
+    width: 50px;
+    height: 50px;
+}
 
-        .chat-button img {
-            width: 50px;
-            height: 50px;
-        }
+/* Diseño responsivo */
+@media (max-width: 600px) {
+    .product {
+        width: 45%;
+        margin: 2%;
+    }
 
-        /* Diseño responsivo */
-        @media (max-width: 600px) {
-            .product {
-                width: 45%;
-                margin: 2%;
-            }
+    .menu-button {
+        top: 15px;
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
 
-            .menu-button {
-                top: 15px;
-                left: 15px;
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
+    .menu-button img {
+        width: 18px;
+        height: 18px;
+    }
 
-            .menu-button img {
-                width: 18px;
-                height: 18px;
-            }
+    .chat-button img {
+        width: 40px;
+        height: 40px;
+    }
+}
 
-            .chat-button img {
-                width: 40px;
-                height: 40px;
-            }
-        }
     </style>
 </head>
 
@@ -358,7 +334,6 @@
     <!-- Animación inicial -->
     <div class="intro">
         <img src="https://i.imgur.com/fUKxUTj.png" alt="TecHogar Logo" class="intro-logo">
-        <canvas id="explosionCanvas"></canvas> <!-- Canvas para explosión de partículas -->
     </div>
 
     <!-- Header con logo centrado -->
@@ -394,15 +369,16 @@
                 </div>
             </div>
             <!-- Producto 2 -->
-            <div class="product" data-category="celulares">
-                <img src="producto2.png" alt="Go Spark 8 ram 128gb">
-                <div class="product-info">
-                    <p class="name">Go Spark 8 ram 128gb</p>
-                    <p class="price">Precio contado: $205,000</p>
-                    <a class="financing-link" onclick="showFinancing('Go Spark 8 ram 128gb', 205000)">Ver financiamiento</a>
-                </div>
+        <div class="product" data-category="celulares">
+            <img src="producto2.png" alt="Go Spark 8 ram 128gb">
+            <div class="product-info">
+                <p class="name">Go Spark 8 ram 128gb</p>
+                <p class="price">Precio contado: $205,000</p>
+                <a class="financing-link" onclick="showFinancing('Go Spark 8 ram 128gb', 205000)">Ver financiamiento</a>
             </div>
-            <!-- Producto 3 -->
+        </div>
+
+        <!-- Producto 3 -->
         <div class="product" data-category="celulares">
             <img src="producto3.png" alt="Moto E13 64gb">
             <div class="product-info">
@@ -581,9 +557,7 @@
                 <a class="financing-link" onclick="showFinancing('Moto g24 128/4', 250000)">Ver financiamiento</a>
             </div>
         </div>
-            
-            <!-- ... -->
-        </div>
+
 
         <!-- Botón de chat en la esquina inferior derecha -->
         <div class="chat-button" onclick="openChat()">
@@ -592,7 +566,6 @@
         </div>
 
         <!-- Overlay y Modal de Financiamiento -->
-        <!-- ... (el código del modal permanece igual) ... -->
         <div class="overlay" onclick="closeFinancing()"></div>
         <div class="financing" id="financing">
             <button class="close-btn" onclick="closeFinancing()">Cerrar</button>
@@ -619,79 +592,12 @@
 
     <!-- JavaScript -->
     <script>
-        // Variables para la animación de partículas
-        let particles = [];
-        let canvas, ctx;
-        let explosionStarted = false;
-
-        // Función para crear partículas
-        function createParticles(x, y, color) {
-            for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: x,
-                    y: y,
-                    vx: (Math.random() - 0.5) * 5,
-                    vy: (Math.random() - 0.5) * 5,
-                    alpha: 1,
-                    color: color
-                });
-            }
-        }
-
-        // Animar partículas
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, index) => {
-                p.x += p.vx;
-                p.y += p.vy;
-                p.alpha -= 0.01;
-                if (p.alpha <= 0) {
-                    particles.splice(index, 1);
-                } else {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-                    ctx.fillRect(p.x, p.y, 2, 2);
-                }
-            });
-            if (particles.length > 0) {
-                requestAnimationFrame(animateParticles);
-            } else {
+        // Ocultar la animación de introducción y mostrar el contenido
+        window.addEventListener('load', function () {
+            setTimeout(function () {
                 document.querySelector('.intro').style.display = 'none';
                 document.querySelector('.content').style.display = 'block';
-            }
-        }
-
-        // Iniciar la animación de explosión
-        function startExplosion() {
-            if (!explosionStarted) {
-                explosionStarted = true;
-                const logo = document.querySelector('.intro-logo');
-                const rect = logo.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-                createParticles(x, y, '#FFFFFF');
-                animateParticles();
-            }
-        }
-
-        // Configurar el canvas
-        window.addEventListener('load', function () {
-            canvas = document.getElementById('explosionCanvas');
-            ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            // Iniciar la animación después de 2 segundos
-            setTimeout(function () {
-                startExplosion();
-            }, 2000);
-        });
-
-        // Ajustar el tamaño del canvas al cambiar el tamaño de la ventana
-        window.addEventListener('resize', function () {
-            if (canvas) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
+            }, 2000); // Tiempo total de la animación (2 segundos)
         });
 
         // Función para togglear el menú
