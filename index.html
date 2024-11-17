@@ -58,22 +58,24 @@
         }
 
         /* Header con logo centrado y fijo */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 70px; /* Altura fija del header */
-            background-color: #fff;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-            z-index: 1000;
-        }
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Ajusta la altura según el tamaño del logo */
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1000;
+    display: flex; /* Añadido para centrar el logo */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+}
 
-        .header img {
-            max-height: 80px;
-            margin-top: 5px;
-        }
+.header img {
+    max-height: 100px; /* Aumenta este valor para hacer el logo más grande */
+    margin-top: 0; /* Puedes ajustar o eliminar este margen */
+}
 
         /* Botón de menú dentro del header */
         .menu-button {
@@ -166,17 +168,18 @@
             margin-top: 90px; /* Altura del header + info-bar */
         }
 
-        /* Galería */
+         /* Galería */
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             padding: 20px;
         }
 
+        /* Por defecto, 2 productos por fila (dispositivos móviles) */
         .product {
             background: #fff;
-            width: calc(50% - 40px); /* 2 productos por fila */
+            flex: 0 1 calc(50% - 20px); /* 2 productos por fila */
             margin: 10px;
             padding: 10px;
             border-radius: 5px;
@@ -186,6 +189,32 @@
             color: #000;
             border: 1px solid #ddd;
         }
+
+        /* Estilos para escritorio - 5 productos por fila */
+        @media (min-width: 1200px) {
+            .product {
+                flex: 0 1 calc(20% - 20px); /* 5 productos por fila */
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+    .header {
+        height: 80px; /* Altura ajustada para móviles */
+    }
+
+    .header img {
+        max-height: 70px; /* Tamaño del logo en móviles */
+    }
+
+    .info-bar {
+        top: 80px; /* Ajustar posición de la info-bar */
+    }
+
+    .content {
+        margin-top: 110px; /* Ajustar margen superior del contenido */
+    }
+}
 
         .product img {
             width: 100%;
@@ -395,12 +424,21 @@
                 margin-top: 10px;
             }
 
-            .info-bar {
-                top: 60px; /* Ajuste para pantallas pequeñas */
-            }
+            /* Barra informativa fija */
+.info-bar {
+    position: fixed;
+    top: 100px; /* Debajo del header ajustado */
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    overflow: hidden;
+    padding: 5px 10px;
+    z-index: 999;
+    /* Otros estilos */
+}
 
             .content {
-                margin-top: 90px;
+                margin-top: 130px;
             }
         }
     </style>
