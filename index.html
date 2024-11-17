@@ -404,7 +404,7 @@
         height: 50px;
     }
 
-   /* Footer */
+  /* Footer */
 .footer {
     background-color: #f5f5f5;
     color: #000; /* Cambia a #fff si deseas texto blanco */
@@ -414,6 +414,10 @@
     align-items: center; /* Centrar horizontalmente */
     justify-content: center; /* Centrar verticalmente si es necesario */
     text-align: center; /* Asegurar que el texto esté centrado */
+    width: 100%; /* Asegura que ocupe el 100% del ancho */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+    max-width: 1200px; /* Opcional: para limitar el ancho en pantallas muy grandes */
+    margin: 0 auto; /* Centrar el footer si se establece un ancho máximo */
 }
 
 .footer a {
@@ -444,6 +448,21 @@
     width: 30px;
     height: 30px;
 }
+
+@media (min-width: 1200px) {
+    .footer {
+        flex-direction: row; /* Distribución horizontal en pantallas grandes */
+        justify-content: space-between; /* Espaciado entre secciones */
+        text-align: left; /* Alinear texto a la izquierda si es necesario */
+    }
+
+    .footer .contact-info,
+    .footer .social-icons,
+    .footer .copyright {
+        margin: 0 20px; /* Espaciado entre secciones */
+    }
+}
+
         /* Estilos para la sección de entrada inicial en el modal de financiamiento */
 .financing-section h4 {
     display: flex;
