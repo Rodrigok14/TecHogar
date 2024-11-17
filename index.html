@@ -406,7 +406,7 @@
 
     /* Footer */
     .footer {
-        background-color: #007bff;
+        background-color: #f5f5f5;
         color: #fff; /* Aseguramos que el texto sea blanco */
         padding: 20px;
         text-align: center;
@@ -707,7 +707,7 @@
     <!-- Sección de Entrada Inicial -->
     <div class="financing-section">
         <h4>Entrada Inicial <span class="entry-emoji">✅</span></h4>
-        <p class="entry-info">30% del precio total</p>
+        <p class="entry-info" id="entry-info">Calculando...</p>
     </div>
 
     <!-- Opciones Semanales -->
@@ -744,8 +744,9 @@
         </div>
     </div>
 
+   
     <!-- JavaScript -->
-    <!-- JavaScript -->
+<!-- JavaScript -->
 <script>
     // Ocultar la animación de introducción y mostrar el contenido
     window.addEventListener('load', function () {
@@ -837,6 +838,19 @@
 
         const weeks = [4, 8, 12, 16, 20];
         const months = [1, 2, 3, 4, 5];
+
+        // **Nuevo Código: Calcular y Mostrar la Entrada Inicial**
+        const initialPayment = price * 0.3; // Calcula el 30% del precio
+        const formattedInitialPayment = initialPayment.toLocaleString('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0
+        });
+
+        // Selecciona el elemento con id "entry-info" y actualiza su contenido
+        const entryInfoElement = document.getElementById("entry-info");
+        entryInfoElement.textContent = formattedInitialPayment;
+        // **Fin del Nuevo Código**
 
         // Opciones semanales
         weeks.forEach(week => {
@@ -948,8 +962,17 @@
             animationDuration = (textWidth / containerWidth) * baseDurationMobile;
         }
 
+        // **Opcional: Establecer una duración mínima para evitar que la animación sea demasiado rápida**
+        const minDuration = windowWidth > 600 ? 30 : 15; // Segundos
+        if (animationDuration < minDuration) {
+            animationDuration = minDuration;
+        }
+
         // Establecer la duración en la variable CSS
         infoText.style.setProperty('--animation-duration', `${animationDuration}s`);
+
+        // **Opcional: Depuración - Imprimir la duración calculada en la consola**
+        console.log(`Duración de la animación: ${animationDuration}s`);
     }
 
     // Ejecutar la función al cargar la página
@@ -958,6 +981,7 @@
     // Ejecutar la función al redimensionar la ventana
     window.addEventListener('resize', adjustAnimationDuration);
 </script>
+
 </body>
 
 </html>
