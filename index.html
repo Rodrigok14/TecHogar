@@ -410,7 +410,7 @@
     color: #000; /* Cambia a #fff si deseas texto blanco */
     padding: 20px;
     display: flex; /* Activar Flexbox */
-    flex-direction: column; /* Alineación vertical */
+    flex-direction: column; /* Alineación vertical por defecto */
     align-items: center; /* Centrar horizontalmente */
     justify-content: center; /* Centrar verticalmente si es necesario */
     text-align: center; /* Asegurar que el texto esté centrado */
@@ -434,10 +434,21 @@
     margin-bottom: 10px;
 }
 
+.footer .follow-us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.footer .follow-us p {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
 .footer .social-icons {
     display: flex; /* Alinear iconos en fila */
     justify-content: center; /* Centrar iconos */
-    margin-bottom: 10px; /* Espaciado inferior */
 }
 
 .footer .social-icons a {
@@ -449,6 +460,7 @@
     height: 30px;
 }
 
+/* Ajustes para pantallas grandes */
 @media (min-width: 1200px) {
     .footer {
         flex-direction: row; /* Distribución horizontal en pantallas grandes */
@@ -457,9 +469,25 @@
     }
 
     .footer .contact-info,
-    .footer .social-icons,
+    .footer .follow-us,
     .footer .copyright {
         margin: 0 20px; /* Espaciado entre secciones */
+    }
+
+    .footer .follow-us {
+        margin-bottom: 0; /* Quitar margen inferior en escritorio */
+    }
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
+    .footer .follow-us {
+        flex-direction: column; /* Apilar verticalmente en móviles */
+    }
+
+    .footer .follow-us p {
+        margin-right: 0;
+        margin-bottom: 10px;
     }
 }
 
@@ -761,24 +789,26 @@
 </div>
 
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="contact-info">
-            <p>Contacto:</p>
-            <p><a href="mailto:techogar05@gmail.com">techogar05@gmail.com</a></p>
-            <p>WhatsApp: <a href="https://wa.me/5493813198039">+54 9 3813 19-8039</a></p>
-        </div>
+    <footer class="footer">
+    <div class="contact-info">
+        <p>Contacto: correo@ejemplo.com | Tel: +123 456 7890</p>
+    </div>
+    <div class="follow-us">
+        <p>Seguinos</p>
         <div class="social-icons">
             <a href="https://www.facebook.com/TecHogar05" target="_blank">
-                <img src="https://imgur.com/EKVcRMs.png" alt="Facebook">
+                <img src="https://i.imgur.com/EKVcRMs.png" alt="Facebook">
             </a>
             <a href="https://www.instagram.com/techogar.tuc/" target="_blank">
-                <img src="https://imgur.com/LChw2HU.png" alt="Instagram">
+                <img src="https://i.imgur.com/LChw2HU.png" alt="Instagram">
             </a>
         </div>
-         <div>
-            <p>&copy; 2024 TecHogar Todos los derechos reservados.</p>
     </div>
+    <div class="copyright">
+        <p>&copy; 2024 TecHogar Todos los derechos reservados.</p>
+    </div>
+</footer>
+            
     </div>
 
    
