@@ -459,6 +459,10 @@
     width: 30px;
     height: 30px;
 }
+ .footer .social-icons a:hover img {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+}
 
 /* Ajustes para pantallas grandes */
 @media (min-width: 1200px) {
@@ -791,17 +795,17 @@
 
     <footer class="footer">
     <div class="contact-info">
-        <p>Contacto: techogar05@gmail.com | Tel: +54 9 3813 19-8039
+        <p>Contacto: techogar05@gmail.com | Tel: +54 9 3813 19-8039 </p>
     </div>
     <div class="follow-us">
         <p>Seguinos</p>
         <div class="social-icons">
-            <a href="https://www.facebook.com/TecHogar05" target="_blank">
-                <img src="https://i.imgur.com/EKVcRMs.png" alt="Facebook">
-            </a>
-            <a href="https://www.instagram.com/techogar.tuc/" target="_blank">
-                <img src="https://i.imgur.com/LChw2HU.png" alt="Instagram">
-            </a>
+           <a href="https://www.facebook.com/TecHogar05" target="_blank" aria-label="Facebook">
+    <img src="https://i.imgur.com/EKVcRMs.png" alt="Facebook">
+</a>
+            <a href="https://www.instagram.com/techogar.tuc/" target="_blank" aria-label="Instagram">
+    <img src="https://i.imgur.com/LChw2HU.png" alt="Instagram">
+</a>
         </div>
     </div>
     <div class="copyright">
@@ -849,19 +853,18 @@
         }
     });
 
-    // Filtrar productos por categoría
     function filterProducts(category) {
-        const products = document.querySelectorAll('.product');
-        products.forEach(product => {
-            if (category === 'all' || product.dataset.category === category) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
-        });
-        // Cerrar el menú después de seleccionar una categoría
-        document.getElementById('menu-dropdown').style.display = 'none';
-    }
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+    // Cerrar el menú después de seleccionar una categoría
+    document.getElementById('menu-dropdown').style.display = 'none';
+}
 
     // Función para abrir el chat de WhatsApp
     function openChat() {
