@@ -753,7 +753,15 @@
    
     <!-- JavaScript -->
 <!-- JavaScript -->
+<!-- JavaScript -->
 <script>
+    // Variables globales
+    let selectedFinancingOptionWeekly = null;
+    let selectedFinancingOptionMonthly = null;
+    let selectedProductName = '';
+    let selectedProductPrice = 0;
+    let selectedFormattedInitialPayment = ''; // Nueva variable global
+
     // Ocultar la animación de introducción y mostrar el contenido
     window.addEventListener('load', function () {
         setTimeout(function () {
@@ -803,12 +811,7 @@
         window.open(url, '_blank');
     }
 
-    // Código para el modal de financiamiento
-    let selectedFinancingOptionWeekly = null;
-    let selectedFinancingOptionMonthly = null;
-    let selectedProductName = '';
-    let selectedProductPrice = 0;
-
+    // Función para calcular las cuotas
     function calculateInstallments(price, term, type) {
         const initialPayment = price * 0.3; // 30% de entrada
         const remainingBalance = price - initialPayment;
@@ -831,6 +834,7 @@
         return formattedInstallment;
     }
 
+    // Función para mostrar el modal de financiamiento
     function showFinancing(productName, price) {
         selectedProductName = productName;
         selectedProductPrice = price;
@@ -845,18 +849,20 @@
         const weeks = [4, 8, 12, 16, 20];
         const months = [1, 2, 3, 4, 5];
 
-        // **Nuevo Código: Calcular y Mostrar la Entrada Inicial**
-        const initialPayment = price * 0.3; // Calcula el 30% del precio
+        // Calcular la Entrada Inicial (30% del precio)
+        const initialPayment = price * 0.3;
         const formattedInitialPayment = initialPayment.toLocaleString('es-CO', {
             style: 'currency',
             currency: 'COP',
             minimumFractionDigits: 0
         });
 
-        // Selecciona el elemento con id "entry-info" y actualiza su contenido
+        // Asignar el monto formateado a la variable global
+        selectedFormattedInitialPayment = formattedInitialPayment;
+
+        // Actualizar la sección de Entrada Inicial en el modal
         const entryInfoElement = document.getElementById("entry-info");
         entryInfoElement.textContent = formattedInitialPayment;
-        // **Fin del Nuevo Código**
 
         // Opciones semanales
         weeks.forEach(week => {
@@ -907,6 +913,7 @@
         document.getElementById("whatsapp-button-monthly").classList.remove('show');
     }
 
+    // Función para seleccionar una opción de financiamiento
     function selectFinancingOption(event, optionText, type) {
         if (type === 'weekly') {
             selectedFinancingOptionWeekly = optionText;
@@ -917,6 +924,7 @@
         }
     }
 
+    // Función para cerrar el modal de financiamiento
     function closeFinancing() {
         document.querySelector(".overlay").classList.remove("active");
         document.getElementById("financing").classList.remove("active");
@@ -925,7 +933,7 @@
     // Enviar mensaje por WhatsApp - Semanal
     document.getElementById("whatsapp-button-weekly").addEventListener('click', function () {
         if (selectedFinancingOptionWeekly) {
-            const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionWeekly}.`;
+            const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionWeekly} y una entrada inicial de ${selectedFormattedInitialPayment}.`;
             const phoneNumber = '5493813198039';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
@@ -935,7 +943,7 @@
     // Enviar mensaje por WhatsApp - Mensual
     document.getElementById("whatsapp-button-monthly").addEventListener('click', function () {
         if (selectedFinancingOptionMonthly) {
-            const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionMonthly}.`;
+            const message = `Hola, estoy interesado en el ${selectedProductName} con la opción de financiamiento de ${selectedFinancingOptionMonthly} y una entrada inicial de ${selectedFormattedInitialPayment}.`;
             const phoneNumber = '5493813198039';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
@@ -968,7 +976,7 @@
             animationDuration = (textWidth / containerWidth) * baseDurationMobile;
         }
 
-        // **Opcional: Establecer una duración mínima para evitar que la animación sea demasiado rápida**
+        // Establecer una duración mínima para evitar que la animación sea demasiado rápida
         const minDuration = windowWidth > 600 ? 30 : 15; // Segundos
         if (animationDuration < minDuration) {
             animationDuration = minDuration;
@@ -977,7 +985,7 @@
         // Establecer la duración en la variable CSS
         infoText.style.setProperty('--animation-duration', `${animationDuration}s`);
 
-        // **Opcional: Depuración - Imprimir la duración calculada en la consola**
+        // Depuración: Imprimir la duración calculada
         console.log(`Duración de la animación: ${animationDuration}s`);
     }
 
@@ -987,6 +995,7 @@
     // Ejecutar la función al redimensionar la ventana
     window.addEventListener('resize', adjustAnimationDuration);
 </script>
+
 
 </body>
 
