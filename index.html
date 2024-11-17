@@ -305,7 +305,7 @@ body {
 /* Diseño responsivo */
 @media (max-width: 600px) {
     .product {
-        width: 100%;
+        width: 45%;
         margin: 5px 0;
     }
 
@@ -328,49 +328,39 @@ body {
     }
     /* Barra informativa */
 .info-bar {
-    background-color: #007bff;
-    color: #fff;
-    text-align: center;
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    overflow: hidden;
     position: relative;
+    background-color: #007bff;
+    overflow: hidden;
+    padding: 5px 10px;
 }
 
 .info-bar p {
+    color: #fff;
+    font-size: 0.9rem;
     margin: 0;
-    animation: infoSlide 20s infinite;
-    position: absolute;
-    width: 100%;
+    white-space: nowrap;
+    transform: translateX(100%);
+    animation: scrollText 15s linear forwards;
 }
 
-@keyframes infoSlide {
-    0% {
-        top: 100%;
+@keyframes scrollText {
+    from {
+        transform: translateX(100%);
     }
-    5% {
-        top: 0;
+    to {
+        transform: translateX(-100%);
     }
-    20% {
-        top: 0;
-    }
-    25% {
-        top: -100%;
-    }
-    100% {
-        top: -100%;
-    }
+}
 
-    /* Footer */
-.footer {
+  .footer {
     background-color: #007bff;
-    color: #fff;
+    color: #fff; /* Aseguramos que el texto sea blanco */
     padding: 20px;
     text-align: center;
 }
 
 .footer a {
-    color: #fff;
+    color: #fff; /* Enlaces en blanco */
     text-decoration: none;
     margin: 0 10px;
 }
