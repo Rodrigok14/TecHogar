@@ -404,7 +404,7 @@
         height: 50px;
     }
 
-  /* Footer */
+ /* Footer */
 .footer {
     background-color: #f5f5f5;
     color: #000; /* Cambia a #fff si deseas texto blanco */
@@ -459,9 +459,60 @@
     width: 30px;
     height: 30px;
 }
- .footer .social-icons a:hover img {
-    transform: scale(1.1);
+
+.footer .social-icons a:hover img {
+    transform: scale(2.0);
     transition: transform 0.3s;
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1200px) {
+    .footer {
+        flex-direction: row; /* Distribución horizontal en pantallas grandes */
+        justify-content: space-between; /* Espaciado entre secciones */
+        text-align: left; /* Alinear texto a la izquierda si es necesario */
+    }
+
+    .footer .contact-info,
+    .footer .follow-us,
+    .footer .copyright {
+        margin: 0 20px; /* Espaciado entre secciones */
+    }
+
+    .footer .follow-us {
+        margin-bottom: 0; /* Quitar margen inferior en escritorio */
+    }
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
+    .footer {
+        padding: 15px 10px; /* Ajustar padding para móviles */
+    }
+
+    .footer .follow-us {
+        flex-direction: column; /* Apilar verticalmente en móviles */
+        align-items: center; /* Centrar elementos */
+    }
+
+    .footer .follow-us p {
+        margin-right: 0;
+        margin-bottom: 10px; /* Espacio entre el texto y los iconos */
+        font-size: 1rem; /* Ajustar tamaño de fuente si es necesario */
+    }
+
+    .footer .social-icons {
+        justify-content: center; /* Centrar iconos */
+    }
+
+    .footer .social-icons a {
+        margin: 0 5px; /* Reducir margen entre iconos en móviles */
+    }
+
+    .footer .social-icons img {
+        width: 25px; /* Reducir tamaño de iconos en móviles */
+        height: 25px;
+    }
 }
 
 /* Ajustes para pantallas grandes */
@@ -801,11 +852,11 @@
         <p>Seguinos</p>
         <div class="social-icons">
            <a href="https://www.facebook.com/TecHogar05" target="_blank" aria-label="Facebook">
-    <img src="https://i.imgur.com/EKVcRMs.png" alt="Facebook">
-</a>
-            <a href="https://www.instagram.com/techogar.tuc/" target="_blank" aria-label="Instagram">
-    <img src="https://i.imgur.com/LChw2HU.png" alt="Instagram">
-</a>
+               <img src="https://i.imgur.com/EKVcRMs.png" alt="Facebook">
+           </a>
+           <a href="https://www.instagram.com/techogar.tuc/" target="_blank" aria-label="Instagram">
+               <img src="https://i.imgur.com/LChw2HU.png" alt="Instagram">
+           </a>
         </div>
     </div>
     <div class="copyright">
