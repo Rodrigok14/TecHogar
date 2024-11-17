@@ -705,10 +705,10 @@
     <h3 id="product-name"></h3>
     <p class="instruction">Selecciona una opción de financiamiento:</p>
 
-    <!-- Sección de Entrada Inicial -->
+    <!-- Sección de Entrada Inicial para Semanales -->
     <div class="financing-section">
         <h4>Entrada Inicial <span class="entry-emoji">✅</span></h4>
-        <p class="entry-info" id="entry-info">Calculando...</p>
+        <p class="entry-info" id="entry-info-weekly">Calculando...</p>
     </div>
 
     <!-- Opciones Semanales -->
@@ -718,11 +718,13 @@
         <button class="whatsapp-button" id="whatsapp-button-weekly">Enviar por WhatsApp</button>
     </div>
 
+    <!-- Separador -->
     <div class="separator"></div>
-    <!-- Sección de Entrada Inicial -->
+
+    <!-- Sección de Entrada Inicial para Mensuales -->
     <div class="financing-section">
         <h4>Entrada Inicial <span class="entry-emoji">✅</span></h4>
-        <p class="entry-info" id="entry-info">Calculando...</p>
+        <p class="entry-info" id="entry-info-monthly">Calculando...</p>
     </div>
 
     <!-- Opciones Mensuales -->
@@ -732,6 +734,7 @@
         <button class="whatsapp-button" id="whatsapp-button-monthly">Enviar por WhatsApp</button>
     </div>
 </div>
+
 
     <!-- Footer -->
     <div class="footer">
@@ -751,9 +754,7 @@
     </div>
 
    
-    <!-- JavaScript -->
-<!-- JavaScript -->
-<!-- JavaScript -->
+ <!-- JavaScript -->
 <script>
     // Variables globales
     let selectedFinancingOptionWeekly = null;
@@ -860,9 +861,11 @@
         // Asignar el monto formateado a la variable global
         selectedFormattedInitialPayment = formattedInitialPayment;
 
-        // Actualizar la sección de Entrada Inicial en el modal
-        const entryInfoElement = document.getElementById("entry-info");
-        entryInfoElement.textContent = formattedInitialPayment;
+        // Actualizar las secciones de Entrada Inicial en el modal
+        const entryInfoElementWeekly = document.getElementById("entry-info-weekly");
+        const entryInfoElementMonthly = document.getElementById("entry-info-monthly");
+        entryInfoElementWeekly.textContent = formattedInitialPayment;
+        entryInfoElementMonthly.textContent = formattedInitialPayment;
 
         // Opciones semanales
         weeks.forEach(week => {
@@ -995,7 +998,6 @@
     // Ejecutar la función al redimensionar la ventana
     window.addEventListener('resize', adjustAnimationDuration);
 </script>
-
 
 </body>
 
