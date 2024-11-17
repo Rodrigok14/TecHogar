@@ -113,7 +113,7 @@
         /* Botón de menú flotante */
         .menu-button {
             position: fixed;
-            top: 20px;
+            top: 70px; /* Ajustado para estar debajo de la info-bar */
             left: 20px;
             background-color: #007bff;
             color: #fff;
@@ -137,9 +137,9 @@
         /* Menú desplegable */
         .menu-dropdown {
             display: none;
-            position: fixed;
-            top: 70px;
-            left: 20px;
+            position: absolute;
+            top: 60px;
+            left: 0;
             background-color: #007bff; /* Fondo azul */
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -230,6 +230,9 @@
             border: 1px solid #ddd;
             padding: 20px;
             border-radius: 5px;
+            box-sizing: border-box;
+            max-height: 90vh;
+            overflow-y: auto;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             max-width: 400px;
@@ -383,7 +386,7 @@
             }
 
             .menu-button {
-                top: 15px;
+                top: 65px; /* Ajustado para pantallas pequeñas */
                 left: 15px;
                 padding: 8px 12px;
                 font-size: 0.9rem;
@@ -684,20 +687,20 @@
 
     <!-- Footer -->
     <div class="footer">
-    <div class="contact-info">
-        <p>Contacto:</p>
-        <p><a href="mailto:techogar05@gmail.com">techogar05@gmail.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/5493813198039">+54 9 3813 19-8039</a></p>
+        <div class="contact-info">
+            <p>Contacto:</p>
+            <p><a href="mailto:techogar05@gmail.com">techogar05@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/5493813198039">+54 9 3813 19-8039</a></p>
+        </div>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/TecHogar05" target="_blank">
+                <img src="https://i.imgur.com/4N6zvMi.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/techogar.tuc/" target="_blank">
+                <img src="https://i.imgur.com/9kH5vCC.png" alt="Instagram">
+            </a>
+        </div>
     </div>
-    <div class="social-icons">
-        <a href="https://www.facebook.com/TecHogar05" target="_blank">
-            <img src="https://i.imgur.com/4N6zvMi.png" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/techogar.tuc/" target="_blank">
-            <img src="https://i.imgur.com/9kH5vCC.png" alt="Instagram">
-        </a>
-    </div>
-</div>
 
     <!-- JavaScript -->
     <script>
